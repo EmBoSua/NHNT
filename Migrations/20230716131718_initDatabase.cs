@@ -64,9 +64,9 @@ namespace NHNT.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(12,3)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(16,3)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Acreage = table.Column<decimal>(type: "decimal(3,2)", nullable: false),
+                    Acreage = table.Column<decimal>(type: "decimal(16,2)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: true, defaultValue: true),

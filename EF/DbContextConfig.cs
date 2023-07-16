@@ -96,8 +96,8 @@ namespace NHNT.EF
                 e.HasKey(d => d.Id);
                 e.Property(d => d.Id).HasColumnName("Id").ValueGeneratedOnAdd();
                 e.Property(d => d.Address).HasColumnName("Address").HasMaxLength(200).IsRequired();
-                e.Property(d => d.Price).HasColumnName("Price").HasColumnType("decimal(12, 3)").HasConversion(p => Math.Round(p, 2), p => p).IsRequired();
-                e.Property(d => d.Acreage).HasColumnName("Acreage").IsRequired().HasColumnType("decimal(3, 2)").HasConversion(ra => Math.Round(ra, 2), ra => ra);
+                e.Property(d => d.Price).HasColumnName("Price").HasColumnType("decimal(16, 3)").HasConversion(p => Math.Round(p, 2), p => p).IsRequired();
+                e.Property(d => d.Acreage).HasColumnName("Acreage").IsRequired().HasColumnType("decimal(16, 2)").HasConversion(ra => Math.Round(ra, 2), ra => ra);
                 e.Property(d => d.Status).HasColumnName("Status").HasConversion<int>().HasDefaultValue(DepartmentStatus.PENDING);
                 e.Property(propertyExpression: d => d.Description).HasColumnName("Description").HasMaxLength(1000);
                 e.Property(d => d.IsAvailable).HasColumnName("IsAvailable").HasDefaultValue(true);

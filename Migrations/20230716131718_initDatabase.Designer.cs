@@ -10,7 +10,7 @@ using NHNT.EF;
 namespace NHNT.Migrations
 {
     [DbContext(typeof(DbContextConfig))]
-    [Migration("20230716124129_initDatabase")]
+    [Migration("20230716131718_initDatabase")]
     partial class initDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,7 +30,7 @@ namespace NHNT.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Acreage")
-                        .HasColumnType("decimal(3,2)")
+                        .HasColumnType("decimal(16,2)")
                         .HasColumnName("Acreage");
 
                     b.Property<string>("Address")
@@ -64,7 +64,7 @@ namespace NHNT.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(12,3)")
+                        .HasColumnType("decimal(16,3)")
                         .HasColumnName("Price");
 
                     b.Property<int>("Status")
