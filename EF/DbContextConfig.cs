@@ -86,7 +86,7 @@ namespace NHNT.EF
                 e.HasKey(dg => dg.Id);
                 e.Property(dg => dg.Id).HasColumnName("Id").ValueGeneratedOnAdd();
                 e.Property(dg => dg.Name).HasColumnName("Name").HasMaxLength(255).IsRequired();
-                e.Property(dg => dg.Description).HasColumnName("Description").HasMaxLength(300);
+                e.Property(propertyExpression: dg => dg.Description).HasColumnName("Description").HasMaxLength(maxLength: 1000);
                 e.HasMany(dg => dg.Departments).WithOne(d => d.Group).HasForeignKey(d => d.GroupId);
             });
 
@@ -98,9 +98,9 @@ namespace NHNT.EF
                 e.Property(d => d.Address).HasColumnName("Address").HasMaxLength(200).IsRequired();
                 e.Property(d => d.Price).HasColumnName("Price").HasColumnType("decimal(12, 3)").HasConversion(p => Math.Round(p, 2), p => p).IsRequired();
                 e.Property(d => d.Acreage).HasColumnName("Acreage").IsRequired().HasColumnType("decimal(3, 2)").HasConversion(ra => Math.Round(ra, 2), ra => ra);
-                e.Property(d => d.Status).HasColumnName("status").HasConversion<int>().HasDefaultValue(DepartmentStatus.PENDING);
+                e.Property(d => d.Status).HasColumnName("Status").HasConversion<int>().HasDefaultValue(DepartmentStatus.PENDING);
                 e.Property(propertyExpression: d => d.Description).HasColumnName("Description").HasMaxLength(1000);
-                e.Property(d => d.IsAvailable).HasColumnName("is_available").HasDefaultValue(true);
+                e.Property(d => d.IsAvailable).HasColumnName("IsAvailable").HasDefaultValue(true);
                 e.Property(d => d.CreatedAt).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
                 e.Property(d => d.UpdatedAt).HasColumnName("UpdatedAt").HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
                 e.Property(d => d.UserId).HasColumnName("UserId");
