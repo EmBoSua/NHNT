@@ -33,10 +33,10 @@ namespace NHNT.Utils
 
             var claims = new List<Claim>()
             {
-                new Claim("id", user.UserName),
-                new Claim("username", user.UserName),
+                new Claim("id", user.Id.ToString()),
+                new Claim("username", user.Username),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Username),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) // giúp đạnh danh token, làm cho token là duy nhất, có thể dựa vào đây để thu hồi token
             };
 

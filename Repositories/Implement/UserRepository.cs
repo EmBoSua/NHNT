@@ -27,7 +27,7 @@ namespace NHNT.Repositories.Implement
 
         public User GetByUsername(string username)
         {
-            return _context.Users.SingleOrDefault(u => u.UserName == username);
+            return _context.Users.SingleOrDefault(u => u.Username == username);
         }
 
         public User GetByUsernameAndPassowrd(string username, string password)
@@ -35,7 +35,7 @@ namespace NHNT.Repositories.Implement
             User user = _context.Users
                 .Include(u => u.UserRoles)
                 .ThenInclude(ur => ur.Role)
-                .SingleOrDefault(u => u.UserName == username);
+                .SingleOrDefault(u => u.Username == username);
             if (user != null && BCryptNet.Verify(password, user.Password))
             {
                 return user;

@@ -32,23 +32,46 @@ $(document).ready(function () {
   buttonSubmit.click((e) => {
     e.preventDefault();
 
-    if (!validUsername() || !validPassword()) {
-      return;
-    }
-
-    $.ajax({
-      url: "https://localhost:5001/Account/Login",
-      method: "POST",
-      data: {
-        username: username.val(),
-        password: password.val(),
-      },
-      success: function (response) {
-        console.log(response);
-      },
-      error: function (xhr, status, error) {
-        console.log(JSON.parse(xhr.responseText));
-      },
+    Toast.show({
+      title: "Test",
+      message: "Thong tin test"
     });
+
+    // if (!validUsername() || !validPassword()) {
+    //   return;
+    // }
+
+    // $.ajax({
+    //   url: "https://localhost:5001/Account/Login",
+    //   method: "POST",
+    //   data: {
+    //     username: username.val(),
+    //     password: password.val(),
+    //   },
+    //   success: function (response) {
+    //     console.log(response);
+    //   },
+    //   error: function (xhr, status, error) {
+    //     console.log(JSON.parse(xhr.responseText));
+    //   },
+    // });
+    
+    // CustomRequest.postForm(
+    //   url = "https://localhost:5001/Account/Login",
+    //   addToken = false,
+    //   data = {
+    //     username: username.val(),
+    //     password: password.val()
+    //   },
+    //   callback = (data) => {
+    //     console.log(data);
+    //     Toast({
+    //       title: "Thành công!",
+    //       message: data,
+    //       type: "warning",
+    //     })
+    //   }
+    // );
+
   });
 });
