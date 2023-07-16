@@ -41,7 +41,7 @@ namespace NHNT.Repositories.Implement
             _context.Departments.Update(department);
             _context.SaveChanges();
         }
-        
+
         public void Delete(int id)
         {
             Department department = this.GetById(id);
@@ -52,6 +52,21 @@ namespace NHNT.Repositories.Implement
 
             _context.Departments.Remove(department);
             _context.SaveChanges();
+        }
+
+        public Department[] List(int page, int limit)
+        {
+            if (page == 0)
+                page = 1;
+
+            if (limit == 0)
+                limit = int.MaxValue;
+
+            var skip = (page - 1) * limit;
+
+            var departments = _context.Departments.Skip(skip).Take(limit);
+            return departments.ToArray();
+
         }
     }
 }
