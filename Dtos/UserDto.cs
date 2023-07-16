@@ -11,7 +11,7 @@ namespace NHNT.Dtos
         public string Password { get; set; }
         public string Email { get; set; }
         public ICollection<RoleDto> Roles { get; set; }
-        
+
         public UserDto(User user)
         {
             Id = user.Id;
@@ -20,7 +20,7 @@ namespace NHNT.Dtos
             if (user.UserRoles != null && user.UserRoles.Any())
             {
                 Roles = new List<RoleDto>();
-                foreach(UserRole ur in user.UserRoles)
+                foreach (UserRole ur in user.UserRoles)
                 {
                     Roles.Add(new RoleDto(ur.Role));
                 }

@@ -6,13 +6,13 @@ namespace NHNT.Dtos
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Discription { get; set; }
+        public string Description { get; set; }
 
         public RoleDto(Role role)
         {
             Id = role.Id;
             Name = role.Name;
-            Discription = role.Discription;
+            Description = role.Description;
         }
     }
 }

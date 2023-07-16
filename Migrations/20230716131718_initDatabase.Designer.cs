@@ -10,8 +10,8 @@ using NHNT.EF;
 namespace NHNT.Migrations
 {
     [DbContext(typeof(DbContextConfig))]
-    [Migration("20230715231626_init")]
-    partial class init
+    [Migration("20230716131718_initDatabase")]
+    partial class initDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,78 +26,63 @@ namespace NHNT.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id")
+                        .HasColumnName("Id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Acreage")
+                        .HasColumnType("decimal(16,2)")
+                        .HasColumnName("Acreage");
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)")
-                        .HasColumnName("address");
+                        .HasColumnName("Address");
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("create_at")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<string>("Discription")
-                        .IsRequired()
+                    b.Property<string>("Description")
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)")
-                        .HasColumnName("discription");
+                        .HasColumnName("Description");
 
                     b.Property<int?>("GroupId")
                         .IsRequired()
                         .HasColumnType("int")
-                        .HasColumnName("group_id");
+                        .HasColumnName("GroupId");
 
                     b.Property<bool?>("IsAvailable")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true)
-                        .HasColumnName("is_available");
-
-                    b.Property<decimal>("Latitude")
-                        .HasPrecision(18, 6)
-                        .HasColumnType("decimal(18,6)")
-                        .HasColumnName("Latitude");
-
-                    b.Property<decimal>("Longtide")
-                        .HasPrecision(18, 6)
-                        .HasColumnType("decimal(18,6)")
-                        .HasColumnName("longtitude");
+                        .HasColumnName("IsAvailable");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)")
-                        .HasColumnName("phone_number");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(12,3)")
-                        .HasColumnName("price");
-
-                    b.Property<decimal>("RoomAread")
-                        .HasColumnType("decimal(3,2)")
-                        .HasColumnName("room_aread");
+                        .HasColumnType("decimal(16,3)")
+                        .HasColumnName("Price");
 
                     b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0)
-                        .HasColumnName("status");
+                        .HasColumnName("Status");
 
-                    b.Property<DateTime>("UpdateAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime2")
-                        .HasColumnName("update_at")
+                        .HasColumnName("UpdatedAt")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int?>("UserId")
                         .IsRequired()
                         .HasColumnType("int")
-                        .HasColumnName("user_id");
+                        .HasColumnName("UserId");
 
                     b.HasKey("Id");
 
@@ -105,7 +90,7 @@ namespace NHNT.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("department");
+                    b.ToTable("Department");
                 });
 
             modelBuilder.Entity("NHNT.Models.DepartmentGroup", b =>
@@ -113,23 +98,23 @@ namespace NHNT.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id")
+                        .HasColumnName("Id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Discription")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)")
-                        .HasColumnName("discription");
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnName("Description");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)")
-                        .HasColumnName("name");
+                        .HasColumnName("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("tbl_department_group");
+                    b.ToTable("DepartmentGroups");
                 });
 
             modelBuilder.Entity("NHNT.Models.Image", b =>
@@ -137,30 +122,30 @@ namespace NHNT.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id")
+                        .HasColumnName("Id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("create_at")
+                        .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int?>("DepartmentId")
                         .HasColumnType("int")
-                        .HasColumnName("department_id");
+                        .HasColumnName("DepartmentId");
 
                     b.Property<string>("Path")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)")
-                        .HasColumnName("path");
+                        .HasColumnName("Path");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("tbl_image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("NHNT.Models.RefreshToken", b =>
@@ -168,50 +153,52 @@ namespace NHNT.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id")
+                        .HasColumnName("Id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("ExpiredAt")
+                    b.Property<DateTime?>("ExpiredAt")
+                        .IsRequired()
                         .HasColumnType("datetime2")
-                        .HasColumnName("expired_at");
+                        .HasColumnName("ExpiredAt");
 
                     b.Property<bool?>("IsRevoked")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true)
-                        .HasColumnName("is_revoked");
+                        .HasColumnName("IsRevoked");
 
                     b.Property<bool?>("IsUsed")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true)
-                        .HasColumnName("is_used");
+                        .HasColumnName("IsUsed");
 
-                    b.Property<DateTime>("IssuedAt")
+                    b.Property<DateTime?>("IssuedAt")
+                        .IsRequired()
                         .HasColumnType("datetime2")
-                        .HasColumnName("issued_at");
+                        .HasColumnName("IssuedAt");
 
                     b.Property<string>("JwtId")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)")
-                        .HasColumnName("jwt_id");
+                        .HasColumnName("JwtId");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int")
-                        .HasColumnName("user_id");
+                        .HasColumnName("UserId");
 
                     b.Property<string>("Value")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)")
-                        .HasColumnName("value");
+                        .HasColumnName("Value");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tbl_refresh_token");
+                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("NHNT.Models.Role", b =>
@@ -219,26 +206,26 @@ namespace NHNT.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id")
+                        .HasColumnName("Id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Discription")
+                    b.Property<string>("Description")
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)")
-                        .HasColumnName("discription");
+                        .HasColumnName("Description");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
-                        .HasColumnName("name");
+                        .HasColumnName("Name");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("tbl_role");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("NHNT.Models.User", b =>
@@ -246,64 +233,64 @@ namespace NHNT.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id")
+                        .HasColumnName("Id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2")
-                        .HasColumnName("birthday");
+                        .HasColumnName("Birthday");
 
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("create_at")
+                        .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)")
-                        .HasColumnName("email");
+                        .HasColumnName("Email");
 
                     b.Property<string>("FullName")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)")
-                        .HasColumnName("full_name");
+                        .HasColumnName("FullName");
 
                     b.Property<int>("Gender")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValue(2)
-                        .HasColumnName("gender");
+                        .HasDefaultValue(1)
+                        .HasColumnName("Gender");
 
-                    b.Property<bool>("IsDisable")
+                    b.Property<bool>("IsDisabled")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false)
-                        .HasColumnName("is_disable");
+                        .HasColumnName("IsDisabled");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)")
-                        .HasColumnName("password");
+                        .HasColumnName("Password");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)")
-                        .HasColumnName("phone");
+                        .HasColumnName("Phone");
 
-                    b.Property<DateTime>("UpdateAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2")
-                        .HasColumnName("update_at")
+                        .HasColumnName("UpdatedAt")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
-                        .HasColumnName("username");
+                        .HasColumnName("Username");
 
                     b.HasKey("Id");
 
@@ -312,29 +299,29 @@ namespace NHNT.Migrations
 
                     b.HasIndex("Phone")
                         .IsUnique()
-                        .HasFilter("[phone] IS NOT NULL");
+                        .HasFilter("[Phone] IS NOT NULL");
 
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("tbl_user");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("NHNT.Models.UserRole", b =>
                 {
                     b.Property<int>("RoleId")
                         .HasColumnType("int")
-                        .HasColumnName("role_id");
+                        .HasColumnName("RoleId");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int")
-                        .HasColumnName("user_id");
+                        .HasColumnName("UserId");
 
                     b.HasKey("RoleId", "UserId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tbl_user_role");
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("NHNT.Models.Department", b =>

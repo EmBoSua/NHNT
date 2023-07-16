@@ -4,6 +4,6 @@ namespace NHNT.Constants
     {
         PENDING = 0, 
         CANCEL = 1, 
-        ACCEPTED = 3,
+        ACCEPTED = 2,
     }
 }

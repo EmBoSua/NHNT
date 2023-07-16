@@ -14,9 +14,9 @@ namespace NHNT.Models
         public string Phone { get; set; }
         public Gender Gender { get; set; }
         public DateTime Birthday { get; set; }
-        public Boolean IsDisable { get; set; }
-        public DateTime CreateAt { get; set; }
-        public DateTime UpdateAt { get; set; }
+        public Boolean IsDisabled { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<Department> Departments { get; set; }
     }

@@ -29,7 +29,7 @@ namespace NHNT.Services.Implement
             User user = _userRepository.GetById(id);
             if (user == null)
             {
-                throw new DataRuntimeException(StatusNotExist.USER_ID);
+                throw new DataRuntimeException(StatusNotExist.UserId);
             }
 
             return new UserDto(user);
@@ -45,7 +45,7 @@ namespace NHNT.Services.Implement
             User user = _userRepository.GetByUsername(username);
             if (user == null)
             {
-                throw new DataRuntimeException(StatusNotExist.USER_ID);
+                throw new DataRuntimeException(StatusNotExist.UserId);
             }
 
             return new UserDto(user);
@@ -102,7 +102,7 @@ namespace NHNT.Services.Implement
             ClaimsPrincipal claimsPrincipal = jwtSecurityTokenHandler.ValidateToken(accessTokenOld, TokenUtils.GetTokenValidationParameters(), out securityToken);
 
             // kiểm tra thuật toán
-            bool validAlgorithm = ((JwtSecurityToken) securityToken).Header.Alg.Equals(AppSettingConfig.Algorithms, StringComparison.InvariantCultureIgnoreCase);
+            bool validAlgorithm = ((JwtSecurityToken)securityToken).Header.Alg.Equals(AppSettingConfig.Algorithms, StringComparison.InvariantCultureIgnoreCase);
             if (!validAlgorithm)
             {
                 throw new DataRuntimeException(StatusServer.TOKEN_INVALID);
