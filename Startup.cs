@@ -36,10 +36,11 @@ namespace NHNT
             {
                 options.UseSqlServer(Configuration.GetConnectionString("QuangTV"));
             });
-            
+
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
             {
@@ -55,7 +56,8 @@ namespace NHNT
                 };
             });
 
-            services.AddAuthorization(option => {
+            services.AddAuthorization(option =>
+            {
                 option.AddPolicy(RoleConfig.ADMIN, policy => policy.RequireRole(RoleConfig.ADMIN));
                 option.AddPolicy(RoleConfig.USER, policy => policy.RequireRole(RoleConfig.USER));
             });
