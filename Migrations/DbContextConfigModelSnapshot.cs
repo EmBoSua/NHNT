@@ -103,7 +103,7 @@ namespace NHNT.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("department");
+                    b.ToTable("Department");
                 });
 
             modelBuilder.Entity("NHNT.Models.DepartmentGroup", b =>
@@ -127,7 +127,7 @@ namespace NHNT.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tbl_department_group");
+                    b.ToTable("DepartmentGroups");
                 });
 
             modelBuilder.Entity("NHNT.Models.Image", b =>
@@ -158,7 +158,7 @@ namespace NHNT.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("tbl_image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("NHNT.Models.RefreshToken", b =>
@@ -209,7 +209,7 @@ namespace NHNT.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tbl_refresh_token");
+                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("NHNT.Models.Role", b =>
@@ -236,7 +236,7 @@ namespace NHNT.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("tbl_role");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("NHNT.Models.User", b =>
@@ -315,7 +315,7 @@ namespace NHNT.Migrations
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("tbl_user");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("NHNT.Models.UserRole", b =>
@@ -332,7 +332,7 @@ namespace NHNT.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tbl_user_role");
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("NHNT.Models.Department", b =>

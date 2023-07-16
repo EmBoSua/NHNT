@@ -24,7 +24,7 @@ namespace NHNT.EF
         {
             modelBuilder.Entity<User>(e =>
             {
-                e.ToTable("tbl_user");
+                e.ToTable("Users");
                 e.HasKey(u => u.Id);
                 e.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
                 e.Property(u => u.Username).HasColumnName("username").HasMaxLength(100).IsRequired();
@@ -46,7 +46,7 @@ namespace NHNT.EF
 
             modelBuilder.Entity<Role>(e =>
             {
-                e.ToTable("tbl_role");
+                e.ToTable("Roles");
                 e.HasKey(r => r.Id);
                 e.Property(r => r.Id).HasColumnName("id").ValueGeneratedOnAdd();
                 e.Property(r => r.Name).HasColumnName("name").HasMaxLength(50).IsRequired();
@@ -57,7 +57,7 @@ namespace NHNT.EF
 
             modelBuilder.Entity<UserRole>(e =>
             {
-                e.ToTable("tbl_user_role");
+                e.ToTable("UserRoles");
                 e.HasKey(ur => new { ur.RoleId, ur.UserId });
                 e.Property(ur => ur.UserId).HasColumnName("user_id");
                 e.Property(ur => ur.RoleId).HasColumnName("role_id");
@@ -67,7 +67,7 @@ namespace NHNT.EF
 
             modelBuilder.Entity<RefreshToken>(e =>
             {
-                e.ToTable("tbl_refresh_token");
+                e.ToTable("RefreshTokens");
                 e.HasKey(rf => rf.Id);
                 e.Property(rf => rf.Id).HasColumnName("id").ValueGeneratedOnAdd();
                 e.Property(rf => rf.UserId).HasColumnName("user_id");
@@ -80,8 +80,9 @@ namespace NHNT.EF
                 e.Property(rf => rf.ExpiredAt).HasColumnName("expired_at").IsRequired();
             });
 
-            modelBuilder.Entity<DepartmentGroup>(e => {
-                e.ToTable("tbl_department_group");
+            modelBuilder.Entity<DepartmentGroup>(e =>
+            {
+                e.ToTable("DepartmentGroups");
                 e.HasKey(dg => dg.Id);
                 e.Property(dg => dg.Id).HasColumnName("id").ValueGeneratedOnAdd();
                 e.Property(dg => dg.Name).HasColumnName("name").HasMaxLength(255).IsRequired();
@@ -89,8 +90,9 @@ namespace NHNT.EF
                 e.HasMany(dg => dg.Departments).WithOne(d => d.Group).HasForeignKey(d => d.GroupId);
             });
 
-            modelBuilder.Entity<Department>(e => {
-                e.ToTable("department");
+            modelBuilder.Entity<Department>(e =>
+            {
+                e.ToTable("Department");
                 e.HasKey(d => d.Id);
                 e.Property(d => d.Id).HasColumnName("id");
                 e.Property(d => d.Address).HasColumnName("address").HasMaxLength(200).IsRequired();
@@ -111,8 +113,9 @@ namespace NHNT.EF
                 e.HasMany(d => d.Images).WithOne(i => i.Department).HasForeignKey(i => i.DepartmentId);
             });
 
-            modelBuilder.Entity<Image>(e => {
-                e.ToTable("tbl_image");
+            modelBuilder.Entity<Image>(e =>
+            {
+                e.ToTable("Images");
                 e.HasKey(i => i.Id);
                 e.Property(i => i.Id).HasColumnName("id");
                 e.Property(i => i.Path).HasColumnName("path").HasMaxLength(150).IsRequired();
