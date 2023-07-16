@@ -37,24 +37,24 @@ $(document).ready(function () {
       message: "Thong tin test"
     });
 
-    // if (!validUsername() || !validPassword()) {
-    //   return;
-    // }
+    if (!validUsername() || !validPassword()) {
+      return;
+    }
 
-    // $.ajax({
-    //   url: "https://localhost:5001/Account/Login",
-    //   method: "POST",
-    //   data: {
-    //     username: username.val(),
-    //     password: password.val(),
-    //   },
-    //   success: function (response) {
-    //     console.log(response);
-    //   },
-    //   error: function (xhr, status, error) {
-    //     console.log(JSON.parse(xhr.responseText));
-    //   },
-    // });
+    $.ajax({
+      url: "https://localhost:5001/Account/Login",
+      method: "POST",
+      data: {
+        username: username.val(),
+        password: password.val(),
+      },
+      success: function (response) {
+        console.log(response);
+      },
+      error: function (xhr, status, error) {
+        console.log(JSON.parse(xhr.responseText));
+      },
+    });
     
     // CustomRequest.postForm(
     //   url = "https://localhost:5001/Account/Login",
