@@ -8,5 +8,6 @@ namespace NHNT.Repositories
         void Add(Department department);
         void Update(Department department);
         void Delete(int id);
+
     }
 }
