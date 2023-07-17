@@ -10,6 +10,7 @@ using NHNT.Exceptions;
 using NHNT.Models;
 using NHNT.Repositories;
 using NHNT.Utils;
+using System.Text.Json;
 
 namespace NHNT.Services.Implement
 {
@@ -26,9 +27,14 @@ namespace NHNT.Services.Implement
         public DepartmentDto[] List(int page, int limit)
         {
             var departments = _departmentRepository.List(page, limit);
-            DepartmentDto[] result = { };
-
+            DepartmentDto[] result = Array.ConvertAll(array: departments, new Converter<Department, DepartmentDto>(ConvertDepartmentDto));
+            // Console.WriteLine(JsonSerializer.Serialize(result));
             return result;
+        }
+
+        public static DepartmentDto ConvertDepartmentDto(Department department)
+        {
+            return new DepartmentDto(department);
         }
     }
 }

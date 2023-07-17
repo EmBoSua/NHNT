@@ -17,6 +17,7 @@ namespace NHNT.Dtos
             Id = user.Id;
             Username = user.Username;
             Email = user.Email;
+
             if (user.UserRoles != null && user.UserRoles.Any())
             {
                 Roles = new List<RoleDto>();
