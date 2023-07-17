@@ -1,15 +1,15 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using NHNT.Models;
+using NHNT.Services;
 
 namespace NHNT.Controllers
 {
     public class DepartmentController : ControllerCustom
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IDepartmentService _departmentService;
 
-        public DepartmentController(ILogger<HomeController> logger)
+        public DepartmentController(IDepartmentService departmentService, ILogger<HomeController> logger)
         {
             _logger = logger;
         }
@@ -17,6 +17,12 @@ namespace NHNT.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet("[controller]/[action]/{id}")]
+        public IActionResult Detail([FromRoute] int id)
+        {
+            return View(_departmentService.GetById(id));
         }
     }
 }

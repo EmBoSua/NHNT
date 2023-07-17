@@ -1,4 +1,5 @@
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using NHNT.Constants.Statuses;
 using NHNT.EF;
 using NHNT.Exceptions;
@@ -17,7 +18,11 @@ namespace NHNT.Repositories.Implement
 
         public Department GetById(int id)
         {
-            return _context.Departments.SingleOrDefault(d => d.Id == id);
+            return _context.Departments
+                .Include(d => d.User)
+                .Include(d => d.Images)
+                .Include(d => d.Group)
+                .SingleOrDefault(d => d.Id == id);
         }
 
         public void Add(Department department)

@@ -6,7 +6,7 @@ using NHNT.Models;
 
 namespace NHNT.Repositories.Implement
 {
-    public class DepartmentGroupRepository : IDepartmentGroup
+    public class DepartmentGroupRepository : IDepartmentGroupRepository
     {
         private readonly DbContextConfig _context;
 

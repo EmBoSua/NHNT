@@ -1,9 +1,9 @@
 var CustomRequest = (function () {
   var xhr = new XMLHttpRequest();
 
-  function request(method, url, data, contentType, addToken, callback) {
+  function request(method, url, data, contentType, addToken = false, callback) {
     xhr.open(method, url, true);
-    
+
     if (addToken) {
       setTokenHeader();
     }
@@ -13,7 +13,7 @@ var CustomRequest = (function () {
         if (xhr.status >= 200 && xhr.status < 300) {
           callback(xhr.responseText);
         } else {
-          handleErrorRequest(xhr.status, JSON.parse(xhr.responseText))
+          handleErrorRequest(xhr.status, JSON.parse(xhr.responseText));
         }
       }
     };
@@ -54,33 +54,42 @@ var CustomRequest = (function () {
   }
 
   function handleErrorRequest(status, data) {
-    if (status == 401) {
-      Toast({
-        title: "WARNING!",
-        message: data.Message,
+    if (status == 400) {
+      ToastMessage.show({
         type: "warning",
+        title: "WARNING",
+        message: data.Message,
+      });
+      return;
+    }
+
+    if (status == 401) {
+      ToastMessage.show({
+        type: "warning",
+        title: "WARNING",
+        message: data.Message,
       });
       return;
     }
 
     if (status == 403) {
-      Toast({
+      ToastMessage.show({
+        type: "warning",
         title: "WARNING!",
         message: data.Message,
-        type: "warning",
       });
       return;
     }
 
     if (status == 500) {
-      Toast({
+      ToastMessage.show({
+        type: "error",
         title: "ERROR!",
         message: data.Message,
-        type: "error",
       });
       return;
     }
-    
+
     // ...
   }
 
@@ -89,19 +98,19 @@ var CustomRequest = (function () {
   }
 
   function postJson(url, addToken, data, callback) {
-    request("POST", url, data, 'json', addToken, callback);
+    request("POST", url, data, "json", addToken, callback);
   }
 
   function postForm(url, addToken, data, callback) {
-    request("POST", url, data, 'form', addToken, callback);
+    request("POST", url, data, "form", addToken, callback);
   }
 
   function putJson(url, addToken, data, callback) {
-    request("PUT", url, data, 'json', addToken, callback);
+    request("PUT", url, data, "json", addToken, callback);
   }
 
   function putForm(url, addToken, data, callback) {
-    request("PUT", url, data, 'form', addToken, callback);
+    request("PUT", url, data, "form", addToken, callback);
   }
 
   function del(url, addToken, callback) {
@@ -109,7 +118,7 @@ var CustomRequest = (function () {
   }
 
   function delJson(url, addToken, data, callback) {
-    request("DELETE", url, data, 'json', addToken, callback);
+    request("DELETE", url, data, "json", addToken, callback);
   }
 
   return {
