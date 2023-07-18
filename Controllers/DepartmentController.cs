@@ -21,9 +21,16 @@ namespace NHNT.Controllers
 
         public IActionResult Index(int page, int limit)
         {
-            var departments = _departmentService.List(page, limit);
-            // Console.WriteLine(JsonSerializer.Serialize(departments));
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult ListDepartment(int page, int limit)
+        {
+            var departments = _departmentService.List(page, limit);
+
+            return Json(departments);
+
         }
     }
 }
