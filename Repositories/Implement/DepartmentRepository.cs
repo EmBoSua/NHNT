@@ -73,5 +73,10 @@ namespace NHNT.Repositories.Implement
             var departments = _context.Departments.Where(department => department.UserId == userId);
             return departments.ToArray();
         }
+
+        public int Count()
+        {
+            return _context.Departments.Count();
+        }
     }
 }

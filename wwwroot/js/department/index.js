@@ -50,7 +50,7 @@ const fetchDepartments = (page = 1, limit = 10) => {
     type: "GET",
     url: `/Department/ListDepartment?page=${page}&limit=${limit}`,
     success: function (response) {
-      appendViewDepartment(response);
+      appendViewDepartment(response.data);
     },
     error: function (error) {
       console.log(error);

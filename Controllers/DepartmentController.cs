@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NHNT.Models;
 using NHNT.Services;
+using NHNT.Dtos;
 using System.Text.Json;
 
 namespace NHNT.Controllers
@@ -33,8 +34,10 @@ namespace NHNT.Controllers
         public IActionResult ListDepartment(int page, int limit)
         {
             var departments = _departmentService.List(page, limit);
+            var total = _departmentService.Count();
 
-            return Json(departments);
+            ListDepartmentDto result = new ListDepartmentDto(departments, total);
+            return Json(result);
 
         }
 
@@ -42,7 +45,6 @@ namespace NHNT.Controllers
         public IActionResult FindByUser([FromRoute] int id)
         {
             var departments = _departmentService.FindByUserId(id);
-
             return Json(departments);
         }
     }

@@ -11,5 +11,7 @@ namespace NHNT.Repositories
         // pagination department
         Department[] List(int page, int limit);
         Department[] FindByUserId(int userId);
+
+        int Count();
     }
 }

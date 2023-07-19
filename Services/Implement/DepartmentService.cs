@@ -45,5 +45,11 @@ namespace NHNT.Services.Implement
 
             return result;
         }
+
+        public int Count()
+        {
+            var count = _departmentRepository.Count();
+            return count;
+        }
     }
 }
