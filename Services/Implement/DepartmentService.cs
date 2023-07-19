@@ -36,5 +36,14 @@ namespace NHNT.Services.Implement
         {
             return new DepartmentDto(department);
         }
+
+        public DepartmentDto[] FindByUserId(int userId)
+        {
+            var departments = _departmentRepository.FindByUserId(userId);
+
+            DepartmentDto[] result = Array.ConvertAll(array: departments, new Converter<Department, DepartmentDto>(ConvertDepartmentDto));
+
+            return result;
+        }
     }
 }

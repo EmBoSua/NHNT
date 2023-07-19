@@ -10,5 +10,6 @@ namespace NHNT.Repositories
         void Delete(int id);
         // pagination department
         Department[] List(int page, int limit);
+        Department[] FindByUserId(int userId);
     }
 }

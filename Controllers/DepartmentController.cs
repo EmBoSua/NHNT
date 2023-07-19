@@ -24,6 +24,11 @@ namespace NHNT.Controllers
             return View();
         }
 
+        public IActionResult MyDepartment()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult ListDepartment(int page, int limit)
         {
@@ -31,6 +36,14 @@ namespace NHNT.Controllers
 
             return Json(departments);
 
+        }
+
+        [HttpGet("[controller]/[action]/{id}")]
+        public IActionResult FindByUser([FromRoute] int id)
+        {
+            var departments = _departmentService.FindByUserId(id);
+
+            return Json(departments);
         }
     }
 }

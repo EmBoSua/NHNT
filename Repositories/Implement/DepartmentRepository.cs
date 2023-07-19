@@ -66,7 +66,12 @@ namespace NHNT.Repositories.Implement
 
             var departments = _context.Departments.Skip(skip).Take(limit);
             return departments.ToArray();
+        }
 
+        public Department[] FindByUserId(int userId)
+        {
+            var departments = _context.Departments.Where(department => department.UserId == userId);
+            return departments.ToArray();
         }
     }
 }
