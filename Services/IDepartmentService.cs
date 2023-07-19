@@ -1,4 +1,3 @@
-
 using NHNT.Dtos;
 using NHNT.Models;
 
@@ -8,5 +7,7 @@ namespace NHNT.Services
     {
         DepartmentDto[] List(int page, int limit);
         Department GetById(int id);
+
+        void register(DepartmentRegisDto departmentDto);
     }
 }
