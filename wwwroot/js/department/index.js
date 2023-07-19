@@ -1,5 +1,20 @@
 window.addEventListener("load", () => {
-  fetchDepartments();
+  fetchDepartments(page, 12);
+});
+
+let page = 1;
+const previousPage = document.querySelector("#previous-page");
+const nextPage = document.querySelector("#next-page");
+
+previousPage.addEventListener("click", () => {
+  if (page === 1) return;
+  page = page - 1;
+  console.log("previousPage", page);
+});
+
+nextPage.addEventListener("click", () => {
+  page = page + 1;
+  console.log("nextPage", page);
 });
 
 const renderCard = (department) => {
