@@ -9,5 +9,7 @@ namespace NHNT.Services
         Department GetById(int id);
 
         void register(DepartmentRegisDto departmentDto);
+
+        void Update(int id, DepartmentUpdateDto departmentDto);
     }
 }

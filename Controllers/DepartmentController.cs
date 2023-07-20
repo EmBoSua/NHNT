@@ -47,10 +47,28 @@ namespace NHNT.Controllers
             {
                 Console.WriteLine(e.Message);
             }
-            // return View("[controller]/action/register");
             return View();
         }
 
 
+        [HttpGet("[controller]/[action]")]
+        public IActionResult Update()
+        {
+            return View();
+        }
+
+        [HttpPost("[controller]/[action]/{id}")]
+        public IActionResult Update([FromForm] DepartmentUpdateDto departmentDto, int id)
+        {
+            try
+            {
+                _departmentService.Update(id, departmentDto);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return View();
+        }
     }
 }

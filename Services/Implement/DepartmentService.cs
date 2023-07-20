@@ -5,6 +5,7 @@ using NHNT.Models;
 using NHNT.Repositories;
 using NHNT.Utils;
 using System;
+using System.Reflection;
 
 namespace NHNT.Services.Implement
 {
@@ -65,6 +66,31 @@ namespace NHNT.Services.Implement
             _imageService.saveMultiple(departmentDto.Images, department.Id);
 
             throw new System.NotImplementedException();
+        }
+
+        public void Update(int id, DepartmentUpdateDto departmentDto)
+        {
+            Department department = _departmentRepository.GetById(id);
+            if (department == null)
+            {
+                throw new InvalidOperationException("Department not found.");
+            }
+            Type dtoType = departmentDto.GetType();
+            PropertyInfo[] dtoProperties = dtoType.GetProperties();
+
+            foreach (PropertyInfo property in dtoProperties)
+            {
+                if (property.GetValue(departmentDto) != null)
+                {
+                    PropertyInfo departmentProperty = department.GetType().GetProperty(property.Name);
+                    if (departmentProperty != null)
+                    {
+                        departmentProperty.SetValue(department, property.GetValue(departmentDto));
+                    }
+                }
+            }
+            _departmentRepository.Update(department);
+            throw new NotImplementedException();
         }
     }
 }
