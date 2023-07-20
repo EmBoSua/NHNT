@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using NHNT.Models;
@@ -19,7 +18,7 @@ namespace NHNT.Services.Implement
             _imageRepository = imageRepository;
         }
 
-        public void saveMultiple(ICollection<IFormFile> images, Department department)
+        public void saveMultiple(ICollection<IFormFile> images, int departmentId)
         {
 
             if (images != null & images.Count > 0)
@@ -49,7 +48,7 @@ namespace NHNT.Services.Implement
                     {
                         Path = fileName,
                         CreatedAt = currentTime,
-                        Department = department
+                        DepartmentId = departmentId
                     };
                     _imageRepository.Add(image);
                 }

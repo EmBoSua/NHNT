@@ -5,27 +5,20 @@ using NHNT.Models;
 using NHNT.Repositories;
 using NHNT.Utils;
 using System;
-using System.Globalization;
 
 namespace NHNT.Services.Implement
 {
     public class DepartmentService : IDepartmentService
     {
         private readonly IDepartmentRepository _departmentRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly IDepartmentGroupRepository _departmentGroupRepository;
         private readonly IImageService _imageService;
 
         public DepartmentService(
             IDepartmentRepository departmentRepository,
-            IUserRepository userRepository,
-            IDepartmentGroupRepository departmentGroupRepository,
             IImageService imageService
             )
         {
             this._departmentRepository = departmentRepository;
-            this._userRepository = userRepository;
-            this._departmentGroupRepository = departmentGroupRepository;
             _imageService = imageService;
         }
 
@@ -52,8 +45,6 @@ namespace NHNT.Services.Implement
         public void register(DepartmentRegisDto departmentDto)
         {
 
-            User userStored = this._userRepository.GetById((int)departmentDto.UserId);
-            DepartmentGroup departmentGroupStored = this._departmentGroupRepository.GetById(departmentDto.GroupId);
             DateTime currentTime = DateTimeUtils.GetCurrentTime(); ;
 
             var department = new Department
@@ -67,13 +58,11 @@ namespace NHNT.Services.Implement
                 IsAvailable = departmentDto.IsAvailable,
                 CreatedAt = currentTime,
                 UpdatedAt = currentTime,
-                User = userStored,
-                Group = departmentGroupStored,
                 UserId = departmentDto.UserId,
                 GroupId = departmentDto.GroupId,
             };
             _departmentRepository.Add(department);
-            _imageService.saveMultiple(departmentDto.Images, department);
+            _imageService.saveMultiple(departmentDto.Images, department.Id);
 
             throw new System.NotImplementedException();
         }
