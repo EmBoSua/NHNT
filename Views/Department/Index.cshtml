@@ -17,21 +17,23 @@
                 <span aria-hidden="true">&laquo;</span>
             </button>
         </li>
-        <li class="page-item">
-            <button class="page-link">
-              1
-            </button>
-        </li>
-        <li class="page-item">
-            <button class="page-link">
-               2
-            </button>
-        </li>
-        <li class="page-item">
-            <button class="page-link">
-               3
-            </button>
-        </li>
+        <div class="pagination-page">
+            <li class="page-item">
+                <button class="page-link">
+                1
+                </button>
+            </li>
+            <li class="page-item">
+                <button class="page-link">
+                2
+                </button>
+            </li>
+            <li class="page-item">
+                <button class="page-link">
+                3
+                </button>
+            </li>
+        </div>
         <li>
             <button class="page-link" href="#" aria-label="Next" id="next-page">
                 <span aria-hidden="true">&raquo;</span>
@@ -50,9 +52,11 @@
 }
 
 .list-card {
-    display: flex;
+display: flex;
     flex-wrap: wrap;
-    gap: 10px
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
 }
 
 .card
@@ -74,5 +78,9 @@
 .pagination {
     margin-top: 12px;
     float: right;
+}
+
+.pagination-page {
+    display: flex;
 }
 </style>
