@@ -13,7 +13,7 @@ namespace NHNT.Dtos
         public Decimal Price { get; set; }
         public string PhoneNumber { get; set; }
         public Decimal Acreage { get; set; }
-        public DepartmentStatus Status { get; set; }
+        public DepartmentStatus? Status { get; set; }
         public string Description { get; set; }
         public bool IsAvailable { get; set; }
         public DateTime? CreatedAt { get; set; }
@@ -27,6 +27,11 @@ namespace NHNT.Dtos
         {
             this.Id = id;
             this.Address = address;
+
+        }
+        public DepartmentDto()
+        {
+
         }
 
         public DepartmentDto(Department department)

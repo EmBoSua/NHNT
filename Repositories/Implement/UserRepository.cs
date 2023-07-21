@@ -27,7 +27,10 @@ namespace NHNT.Repositories.Implement
 
         public User GetByUsername(string username)
         {
-            return _context.Users.SingleOrDefault(u => u.Username == username);
+            return _context.Users
+                .Include(u => u.UserRoles)
+                .ThenInclude(ur => ur.Role)
+                .SingleOrDefault(u => u.Username == username);
         }
 
         public User GetByUsernameAndPassowrd(string username, string password)

@@ -2,7 +2,7 @@ using NHNT.Models;
 
 namespace NHNT.Repositories
 {
-    public interface IDepartmentGroup
+    public interface IDepartmentGroupRepository
     {
         DepartmentGroup GetById(int id);
         void Add(DepartmentGroup departmentGroup);

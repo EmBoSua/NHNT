@@ -34,13 +34,16 @@ namespace NHNT
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddDbContext<DbContextConfig>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("QuangTV"));
+                options.UseSqlServer(Configuration.GetConnectionString("MyDb"));
             });
 
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IDepartmentGroupRepository, DepartmentGroupRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>

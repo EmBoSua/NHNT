@@ -14,6 +14,11 @@ namespace NHNT.Dtos
 
         public UserDto(User user)
         {
+            if (user == null)
+            {
+                return;
+            }
+            
             Id = user.Id;
             Username = user.Username;
             Email = user.Email;

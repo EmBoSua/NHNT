@@ -1,5 +1,7 @@
 
+using System.Collections.Generic;
 using NHNT.Dtos;
+using NHNT.Models;
 
 namespace NHNT.Services
 {
@@ -8,5 +10,8 @@ namespace NHNT.Services
         DepartmentDto[] List(int page, int limit);
         DepartmentDto[] FindByUserId(int userId);
         int Count();
+        Department GetById(int id);
+        List<DepartmentDto> Search(int pageIndex, int pageSize, DepartmentDto dto);
+        Department Confirm(int id, int status);
     }
 }

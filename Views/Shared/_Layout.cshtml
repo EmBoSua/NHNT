@@ -6,7 +6,8 @@
     <title>Ngân hàng nhà trọ - @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/common/toast.css"/>
+    <link rel="stylesheet" href="~/css/utils/toast.css" />
+
     @RenderSection("stylesheet", required: false) 
 </head>
 <body>
@@ -20,39 +21,48 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul id="actionRole" class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Login</a>
-                        </li>
                     </ul>
+                </div>
+                <div class="account-container">
+                    <div id="loginSection" class="login-section" style="display: none;">
+                        <a class="nav-link text-dark account-singin" asp-controller="Account" asp-action="Index">Đăng nhập</a>
+                        <button class="btn btn-info">Đăng Ký</button>
+                    </div>
+                    <div id="userSection" class="user-section" style="display: none;">
+                        <div id="userInfo" class="user-info">Nguyễn Mạnh Hùng</div>
+                        <button class="btn btn-info">Đăng xuất</button>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
     <div class="container body-content">
-        <main role="main">
+        <main role="main" class="pb-3">
+            <div id="toast-container"></div>
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @* <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - NHNT - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer> *@
+    <script src="~/js/utils/CustomRequest.js"></script>
+    <script src="~/js/utils/Toast.js"></script>
+    <script src="~/js/utils/LocalStorage.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <script src="~/js/common/CustomRequest.js"></script>
-    <script src="~/js/common/toast.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

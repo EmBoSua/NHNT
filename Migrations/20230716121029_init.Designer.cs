@@ -10,8 +10,8 @@ using NHNT.EF;
 namespace NHNT.Migrations
 {
     [DbContext(typeof(DbContextConfig))]
-    [Migration("20230716131718_initDatabase")]
-    partial class initDatabase
+    [Migration("20230716121029_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

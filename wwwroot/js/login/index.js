@@ -1,13 +1,14 @@
-$(document).ready(function () {
-  var username = $("#username");
-  var password = $("#password");
-  var messUsername = $("#valid-username");
-  var messPassword = $("#valid-password");
-  var buttonSubmit = $("#btn-submit");
+document.addEventListener("DOMContentLoaded", function () {
+  var username = document.getElementById("username");
+  var password = document.getElementById("password");
+  var messUsername = document.getElementById("valid-username");
+  var messPassword = document.getElementById("valid-password");
+  var buttonSubmit = document.getElementById("btn-submit");
 
   const validUsername = () => {
-    if (username.val() === "") {
-      messUsername.text("Vui lòng nhập tên người dùng").show();
+    if (username.value === "") {
+      messUsername.textContent = "Vui lòng nhập tên người dùng";
+      messUsername.style.display = "block";
       return false;
     }
 
@@ -15,63 +16,51 @@ $(document).ready(function () {
   };
 
   const validPassword = () => {
-    if (password.val() === "") {
-      messPassword.text("Vui lòng nhập mật khẩu").show();
+    if (password.value === "") {
+      messPassword.textContent = "Vui lòng nhập mật khẩu";
+      messPassword.style.display = "block";
       return false;
     }
 
     return true;
   };
 
-  username.keydown(() => messUsername.text("").hide());
-  username.focusout(() => validUsername());
+  username.addEventListener("keydown", function () {
+    messUsername.textContent = "";
+    messUsername.style.display = "none";
+  });
+  username.addEventListener("focusout", validUsername);
 
-  password.keydown(() => messPassword.text("").hide());
-  password.focusout(() => validPassword());
+  password.addEventListener("keydown", function () {
+    messPassword.textContent = "";
+    messPassword.style.display = "none";
+  });
+  password.addEventListener("focusout", validPassword);
 
-  buttonSubmit.click((e) => {
+  buttonSubmit.addEventListener("click", function (e) {
     e.preventDefault();
-
-    Toast.show({
-      title: "Test",
-      message: "Thong tin test"
-    });
 
     if (!validUsername() || !validPassword()) {
       return;
     }
 
-    $.ajax({
+    CustomRequest.postForm({
       url: "https://localhost:5001/Account/Login",
-      method: "POST",
+      addToken: false,
       data: {
-        username: username.val(),
-        password: password.val(),
+        username: username.value,
+        password: password.value
       },
-      success: function (response) {
-        console.log(response);
-      },
-      error: function (xhr, status, error) {
-        console.log(JSON.parse(xhr.responseText));
-      },
+      callback: (response) => {
+        var dataJson = JSON.parse(response);
+        LocalStorage.setToken(response)
+        // ToastMessage.show({
+        //   type: "success",
+        //   title: "Thành công!",
+        //   message: dataJson.expiredTime
+        // });
+        window.location.href = "https://localhost:5001/";
+      }
     });
-    
-    // CustomRequest.postForm(
-    //   url = "https://localhost:5001/Account/Login",
-    //   addToken = false,
-    //   data = {
-    //     username: username.val(),
-    //     password: password.val()
-    //   },
-    //   callback = (data) => {
-    //     console.log(data);
-    //     Toast({
-    //       title: "Thành công!",
-    //       message: data,
-    //       type: "warning",
-    //     })
-    //   }
-    // );
-
   });
 });
