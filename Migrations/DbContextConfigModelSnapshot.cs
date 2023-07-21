@@ -65,8 +65,7 @@ namespace NHNT.Migrations
                         .HasColumnType("decimal(16,3)")
                         .HasColumnName("Price");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
+                    b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0)

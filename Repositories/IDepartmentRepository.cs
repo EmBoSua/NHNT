@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using NHNT.Dtos;
 using NHNT.Models;
 
 namespace NHNT.Repositories
@@ -10,5 +12,6 @@ namespace NHNT.Repositories
         void Delete(int id);
         // pagination department
         Department[] List(int page, int limit);
+        List<Department> Search(int pageIndex, int pageSize, DepartmentDto dto);
     }
 }

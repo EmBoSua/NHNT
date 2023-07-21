@@ -21,11 +21,26 @@ var LocalStorage = (() => {
     setRefreshToken(token.refreshToken);
   };
 
+  const removeToken = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken")
+  }
+
+  const removeAccess = () => {
+    localStorage.removeItem("token");
+  }
+
+  const removeRefresh = () => {
+    localStorage.removeItem("refreshToken")
+  }
   return {
     getAccess: getAccessToken,
     setAccess: setAccessToken,
     getRefresh: getRefreshToken,
     setRefresh: setRefreshToken,
     setToken: setToken,
+    removeAccess: removeAccess,
+    removeRefresh: removeRefresh,
+    removeToken: removeToken,
   };
 })();

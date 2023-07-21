@@ -34,7 +34,7 @@ namespace NHNT
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddDbContext<DbContextConfig>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("QuangTV"));
+                options.UseSqlServer(Configuration.GetConnectionString("MyDb"));
             });
 
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();

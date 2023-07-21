@@ -44,21 +44,23 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    CustomRequest.postForm(
-      url = "https://localhost:5001/Account/Login",
-      addToken = false,
-      data = {
+    CustomRequest.postForm({
+      url: "https://localhost:5001/Account/Login",
+      addToken: false,
+      data: {
         username: username.value,
         password: password.value
       },
-      callback = (data) => {
-        console.log(data);
-        ToastMessage.show({
-          type: "success",
-          title: "Thành công!",
-          message: data.expiredTime
-        })
+      callback: (response) => {
+        var dataJson = JSON.parse(response);
+        LocalStorage.setToken(response)
+        // ToastMessage.show({
+        //   type: "success",
+        //   title: "Thành công!",
+        //   message: dataJson.expiredTime
+        // });
+        window.location.href = "https://localhost:5001/";
       }
-    );
+    });
   });
 });

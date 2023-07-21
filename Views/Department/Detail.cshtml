@@ -9,7 +9,7 @@
 }
 
 <div>
-    <div class="detail-card">
+    @* <div class="detail-card">
     <div class="detail-card-header">
       <h2>Chi tiết phòng trọ</h2>
       <p>Ngày tạo: <span id="create-date"></span></p>
@@ -30,7 +30,67 @@
       </div>
     </div>
     <div class="detail-card-images" id="image-container"></div>
-  </div>
+  </div> *@
+  <div class="container">
+		<div class="card">
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6">
+            @if (Model != null) {
+              var Images = Model.Images.ToArray();
+              <div class="preview-pic tab-content">
+                @for (var i = 0; i < Images.Length; i++) {
+                  <div class='tab-pane @(i == 0 ? "active" : "")' id="pic-@i"><img src="~/images/departments/@Images[i].Path" /></div>
+                }
+              </div>
+              <ul class="preview-thumbnail nav nav-tabs">
+                @for (var i = 0; i < Images.Length; i++) {
+                  <li class='image-detail @(i == 0 ? "active" : "")'><a data-target="#pic-@i" data-toggle="tab"><img src="~/images/departments/@Images[i].Path" /></a></li>
+                }
+              </ul>
+            }
+					</div>
+					<div class="details col-md-6">
+						<h3 class="product-title">@Model.Address</h3>
+            <div class="row">
+              <dt class="col-4">Diện tích:</dt>
+              <dd class="col-8">@Model.Acreage m</dd>
+
+              <dt class="col-4">Giá thuê: </dt>
+              <dd class="col-8">@Model.Price vnđ</dd>
+
+              <dt class="col-4">Ngày đăng: </dt>
+              <dd class="col-8">@Model.CreatedAt</dd>
+              
+              <dt class="col-4">Trạng thái: </dt>
+              <dd class="col-8">@(@Model.IsAvailable.GetValueOrDefault(false) ? "Còn phòng" : "Đã cho thuê") vnđ</dd>
+
+              <dt class="col-4">Chủ nhà</dt>
+              <dd class="col-8">@Model.User.FullName</dd>
+
+              <dt class="col-4">Số điện thoại: </dt>
+              <dd class="col-8">@Model.User.Phone</dd>
+              
+              <dt class="col-4">Chuyên mục: </dt>
+              <dd class="col-8">@Model.Group.Name</dd>
+            </div>
+
+            <p class="product-description">@Model.Description</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  <div class="container">
+    <div class="similar-items">
+      <h2>Các phòng liên quan</h2>
+      <div id="items-container" class="items-container">
+        
+      </div>
+    </div>
+	</div>
+
 </div>
 
 @section Scripts {
