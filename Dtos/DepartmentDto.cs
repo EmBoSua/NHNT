@@ -13,7 +13,7 @@ namespace NHNT.Dtos
         public Decimal Price { get; set; }
         public string PhoneNumber { get; set; }
         public Decimal Acreage { get; set; }
-        public DepartmentStatus Status { get; set; }
+        public DepartmentStatus? Status { get; set; }
         public string Description { get; set; }
         public bool IsAvailable { get; set; }
         public DateTime? CreatedAt { get; set; }
@@ -22,12 +22,25 @@ namespace NHNT.Dtos
         public DepartmentGroupDto Group { get; set; }
         public ICollection<ImageDto> Images { get; set; }
 
+
+        public DepartmentDto(int id, string address)
+        {
+            this.Id = id;
+            this.Address = address;
+
+        }
+        public DepartmentDto()
+        {
+
+        }
+
         public DepartmentDto(Department department)
         {
             if (department == null)
             {
                 return;
             }
+
 
             this.Id = department.Id;
             this.Address = department.Address;
@@ -39,8 +52,16 @@ namespace NHNT.Dtos
             this.IsAvailable = department.IsAvailable ?? false;
             this.CreatedAt = department.CreatedAt;
             this.UpdatedAt = department.UpdatedAt;
-            this.User = new UserDto(department.User);
-            this.Group = new DepartmentGroupDto(department.Group);
+
+            if (department.User != null)
+            {
+                this.User = new UserDto(user: department.User);
+            }
+
+            if (department.Group != null)
+            {
+                this.Group = new DepartmentGroupDto(department.Group);
+            }
 
             if (department.Images != null && department.Images.Any())
             {

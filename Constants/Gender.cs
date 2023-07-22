@@ -4,5 +4,6 @@ namespace NHNT.Constants
     {
         FEMALE = 0,
         MALE = 1,
+        OTHER = 2,
     }
 }

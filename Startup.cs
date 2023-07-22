@@ -46,8 +46,7 @@ namespace NHNT
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
-            services.AddScoped<IImageService, ImageService>();
-
+            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
             {

@@ -4,6 +4,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using NHNT.Utils;
+using NHNT.Models;
 
 namespace NHNT.Controllers
 {
@@ -18,6 +19,12 @@ namespace NHNT.Controllers
             ClaimsPrincipal claimsPrincipal = jwtSecurityTokenHandler.ValidateToken(token, TokenUtils.GetTokenValidationParameters(), out securityToken);
             
             return claimsPrincipal.Claims.FirstOrDefault(x => x.Type == "username").Value;
+        }
+
+        protected UserPartial GetUserPartial()
+        {
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            return TokenUtils.DecodeJwtToken(token);
         }
     }
 }
