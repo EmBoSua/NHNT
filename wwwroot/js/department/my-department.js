@@ -15,16 +15,14 @@ const renderCard = (department) => {
 };
 
 const fetchDepartmentByUser = () => {
-  const userId = 2;
-
-  $.ajax({
-    type: "GET",
-    url: `/Department/FindByUser/${userId}`,
-    success: function (response) {
+  CustomRequest.get({
+    url: `/Department/Me`,
+    addToken: true,
+    callback: (response) => {
       appendViewDepartment(response);
     },
-    error: function (error) {
-      console.log(error);
+    failCallBack: (request) => {
+      console.log(request);
     },
   });
 };
@@ -37,6 +35,10 @@ const appendViewDepartment = (departments) => {
     const htmlDoc = parser.parseFromString(renderCard(department), "text/html");
     const newCard = htmlDoc.querySelector(".card");
     listCard.appendChild(newCard);
+
+    newCard.addEventListener("click", () => {
+      window.location.href = "/Department/Detail/" + department.id;
+    });
   });
 };
 

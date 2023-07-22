@@ -46,7 +46,6 @@ const appendViewDepartment = (departments) => {
     const parser = new DOMParser();
     const htmlDoc = parser.parseFromString(renderCard(department), "text/html");
     const newCard = htmlDoc.querySelector(".card");
-    console.log(newCard);
     listCard.appendChild(newCard);
 
     newCard.addEventListener("click", () => {
@@ -61,14 +60,15 @@ function formatDate(dateString) {
 }
 
 const fetchDepartments = (page = 1, limit = 10) => {
-  $.ajax({
-    type: "GET",
+  CustomRequest.get({
     url: `/Department/ListDepartment?page=${page}&limit=${limit}`,
-    success: function (response) {
-      appendViewDepartment(response.data);
+    addToken: true,
+    callback: (response) => {
+      const data = JSON.parse(response);
+      appendViewDepartment(data.data);
     },
-    error: function (error) {
-      console.log(error);
+    failCallBack: (request) => {
+      console.log(request);
     },
   });
 };

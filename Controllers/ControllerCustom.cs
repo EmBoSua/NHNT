@@ -17,7 +17,7 @@ namespace NHNT.Controllers
             JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             SecurityToken securityToken;
             ClaimsPrincipal claimsPrincipal = jwtSecurityTokenHandler.ValidateToken(token, TokenUtils.GetTokenValidationParameters(), out securityToken);
-            
+
             return claimsPrincipal.Claims.FirstOrDefault(x => x.Type == "username").Value;
         }
 

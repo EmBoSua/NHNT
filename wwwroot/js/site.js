@@ -12,13 +12,13 @@
         var jsonData = JSON.parse(request);
         userInfo.textContent = jsonData.username;
         setActionRole(jsonData.roles);
-        userSection.classList.add("d-flex")
+        userSection.classList.add("d-flex");
         userSection.style.display = "block";
         loginSection.style.display = "none";
       },
       failCallBack: (request) => {
         userSection.style.display = "none";
-        userSection.classList.remove("d-flex")
+        userSection.classList.remove("d-flex");
         loginSection.style.display = "block";
         // console.log("log");
         // window.location.href = "https://localhost:5001/Account/Index";
@@ -59,5 +59,6 @@
 
 const handleLogout = () => {
   LocalStorage.removeToken();
+  localStorage.removeItem("user");
   window.location.href = "https://localhost:5001/";
-}
+};

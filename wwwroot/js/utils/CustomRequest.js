@@ -1,7 +1,15 @@
 var CustomRequest = (function () {
   var xhr = new XMLHttpRequest();
 
-  function request(method, url, data, contentType, addToken = false, success, fail = undefined) {
+  function request(
+    method,
+    url,
+    data,
+    contentType,
+    addToken = false,
+    success,
+    fail = undefined
+  ) {
     xhr.open(method, url, true);
 
     if (addToken) {
@@ -101,35 +109,35 @@ var CustomRequest = (function () {
     // ...
   }
 
-  function get({url, addToken, callback, failCallBack}) {
+  function get({ url, addToken, callback, failCallBack }) {
     request("GET", url, null, null, addToken, callback, failCallBack);
   }
 
-  function getForm({url, addToken, data, callback, failCallBack}) {
+  function getForm({ url, addToken, data, callback, failCallBack }) {
     request("GET", url, data, "form", addToken, callback, failCallBack);
   }
 
-  function postJson({url, addToken, data, callback, failCallBack}) {
+  function postJson({ url, addToken, data, callback, failCallBack }) {
     request("POST", url, data, "json", addToken, callback, failCallBack);
   }
 
-  function postForm({url, addToken, data, callback, failCallBack}) {
+  function postForm({ url, addToken, data, callback, failCallBack }) {
     request("POST", url, data, "form", addToken, callback, failCallBack);
   }
 
-  function putJson({url, addToken, data, callback, failCallBack}) {
+  function putJson({ url, addToken, data, callback, failCallBack }) {
     request("PUT", url, data, "json", addToken, callback, failCallBack);
   }
 
-  function putForm({url, addToken, data, callback, failCallBack}) {
+  function putForm({ url, addToken, data, callback, failCallBack }) {
     request("PUT", url, data, "form", addToken, callback, failCallBack);
   }
 
-  function del({url, addToken, callback, failCallBack}) {
+  function del({ url, addToken, callback, failCallBack }) {
     request("DELETE", url, null, null, addToken, callback, failCallBack);
   }
 
-  function delJson({url, addToken, data, callback, failCallBack}) {
+  function delJson({ url, addToken, data, callback, failCallBack }) {
     request("DELETE", url, data, "json", addToken, callback, failCallBack);
   }
 

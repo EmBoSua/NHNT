@@ -68,6 +68,14 @@ namespace NHNT.Controllers
             return Json(departments);
         }
 
+        [HttpGet("[controller]/[action]")]
+        public IActionResult Me()
+        {
+            var user = GetUserPartial();
+            var departments = _departmentService.FindByUserId(userId: user.Id);
+            return Json(departments);
+        }
+
         [Authorize(RoleConfig.ADMIN)]
         [HttpPost("[controller]/[action]")]
         public IActionResult AdminSearchReview([FromForm] int pageIndex, [FromForm] int pageSize, [FromForm] DepartmentDto dto)
