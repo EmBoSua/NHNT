@@ -68,5 +68,58 @@ namespace NHNT.Repositories.Implement
             _context.Users.Update(user);
             _context.SaveChanges();
         }
+
+        public bool ExistByUsername(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                throw new DataRuntimeException(StatusWrongFormat.USERNAME_IS_EMPTY);
+            }
+
+            User user = _context.Users.SingleOrDefault(u => u.Username == username);
+            if (user == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool NotExistByUsername(string username)
+        {
+            return !ExistByUsername(username);
+        }
+
+        public bool ExistByEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                throw new DataRuntimeException(StatusWrongFormat.EMAIL_IS_EMPTY);
+            }
+
+            User user = _context.Users.SingleOrDefault(u => u.Email == email);
+            if (user == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool ExistByPhone(string phone)
+        {
+            if (string.IsNullOrEmpty(phone))
+            {
+                throw new DataRuntimeException(StatusWrongFormat.PHONE_IS_EMPTY);
+            }
+
+            User user = _context.Users.SingleOrDefault(u => u.Phone == phone);
+            if (user == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

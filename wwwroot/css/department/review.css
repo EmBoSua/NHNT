@@ -31,3 +31,7 @@
 .address {
   word-wrap: break-word;
 }
+
+.detail-image {
+  cursor: pointer;
+}

@@ -9,5 +9,6 @@ namespace NHNT.Services
         TokenDto RefreshToken(string accessTokenOld, string refreshToken);
         UserDto GetUserById(int id); 
         UserDto GetUserByUsername(string username);
+        TokenDto Register(UserDto dto);
     }
 }

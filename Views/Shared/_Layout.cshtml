@@ -33,11 +33,11 @@
                 <div class="account-container">
                     <div id="loginSection" class="login-section" style="display: none;">
                         <a class="nav-link text-dark account-singin" asp-controller="Account" asp-action="Index">Đăng nhập</a>
-                        <button class="btn btn-info">Đăng Ký</button>
+                        <a class="btn btn-info" asp-controller="Account" asp-action="RegisterForm">Đăng Ký</a>
                     </div>
-                    <div id="userSection" class="user-section" style="display: none;">
-                        <div id="userInfo" class="user-info">Nguyễn Mạnh Hùng</div>
-                        <button class="btn btn-info">Đăng xuất</button>
+                    <div id="userSection" class="user-section align-items-center" style="display: none;">
+                        <div id="userInfo" class="user-info"></div>
+                        <button class="btn btn-info" onclick="handleLogout()">Đăng xuất</button>
                     </div>
                 </div>
             </div>

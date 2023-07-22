@@ -15,7 +15,7 @@ var CustomRequest = (function () {
             success(xhr.responseText);
           }
         } else {
-          if (typeof success === "function") {
+          if (typeof fail === "function") {
             fail(xhr.responseText);
           } else {
             handleErrorRequest(xhr.status, JSON.parse(xhr.responseText));
@@ -27,7 +27,7 @@ var CustomRequest = (function () {
     // thêm time out
 
     if (contentType === "json") {
-      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
       var data = JSON.stringify(data);
       xhr.send(data);
     } else if (contentType === "form") {
