@@ -29,7 +29,7 @@ const renderCard = (department) => {
 
   return `<div class="card" id="department-${
     department.id
-  }"><img src="images/departments/${image}" />
+  }"><img src="/images/departments/${image}" />
     <div class="detail">
         <span>Địa chỉ: ${department.address}m2</span>
         <span>Diện tích: ${department.acreage}m2</span>
