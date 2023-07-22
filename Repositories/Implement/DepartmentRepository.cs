@@ -82,6 +82,16 @@ namespace NHNT.Repositories.Implement
             return departments.ToArray();
         }
 
+        public Department[] FindByUserId(int userId)
+        {
+            var departments = _context.Departments.Where(department => department.UserId == userId);
+            return departments.ToArray();
+        }
+
+        public int Count()
+        {
+            return _context.Departments.Count();
+        }
         public List<Department> Search(int pageIndex, int pageSize, DepartmentDto dto)
         {
             pageIndex = (pageIndex <= 0) ? 0 : pageIndex - 1;

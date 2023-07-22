@@ -11,27 +11,27 @@
       callback: (request) => {
         var jsonData = JSON.parse(request);
         userInfo.textContent = jsonData.username;
-        setActionRole(jsonData.roles)
+        setActionRole(jsonData.roles);
         userSection.style.display = "block";
         loginSection.style.display = "none";
       },
       failCallBack: (request) => {
         userSection.style.display = "none";
-        loginSection.style.display = "block";
+        loginSection.style.display = "flex";
         console.log("log");
         // window.location.href = "https://localhost:5001/Account/Index";
       },
     });
   } else {
     userSection.style.display = "none";
-    loginSection.style.display = "block";
+    loginSection.style.display = "flex";
   }
 
   const setActionRole = (roles) => {
     var actionRole = document.getElementById("actionRole");
     if (actionRole && roles) {
-      roles.forEach(element => {
-        if(element.name === "ROLE_ADMIN") {
+      roles.forEach((element) => {
+        if (element.name === "ROLE_ADMIN") {
           var contextHtml = `
             <li class="nav-item">
                 <a class="nav-link text-dark" href="/Department/AdminReview">Department</a>
@@ -52,5 +52,5 @@
         // }
       });
     }
-  }
+  };
 });
