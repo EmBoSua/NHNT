@@ -13,12 +13,10 @@ namespace NHNT.Controllers
 {
     public class DepartmentController : ControllerCustom
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IDepartmentService _departmentService;
 
-        public DepartmentController(ILogger<HomeController> logger, IDepartmentService departmentService)
+        public DepartmentController(IDepartmentService departmentService)
         {
-            _logger = logger;
             _departmentService = departmentService;
         }
 

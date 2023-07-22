@@ -96,8 +96,8 @@ namespace NHNT
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "Department",
+                    pattern: "{controller=Department}/{action=Index}/{id?}");
             });
         }
     }
