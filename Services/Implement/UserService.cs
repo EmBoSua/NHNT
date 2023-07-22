@@ -10,6 +10,7 @@ using NHNT.Exceptions;
 using NHNT.Models;
 using NHNT.Repositories;
 using NHNT.Utils;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace NHNT.Services.Implement
 {
@@ -17,11 +18,20 @@ namespace NHNT.Services.Implement
     {
         private readonly IUserRepository _userRepository;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
+        private readonly IRoleRepository _roleRepository;
+        private readonly IUserRoleRepository _userRoleRepository;
 
-        public UserService(IUserRepository userRepository, IRefreshTokenRepository refreshTokenRepository)
+        public UserService(
+            IUserRepository userRepository,
+            IRefreshTokenRepository refreshTokenRepository,
+            IRoleRepository roleRepository,
+            IUserRoleRepository userRoleRepository
+        )
         {
             _userRepository = userRepository;
             _refreshTokenRepository = refreshTokenRepository;
+            _roleRepository = roleRepository;
+            _userRoleRepository = userRoleRepository;
         }
 
         public UserDto GetUserById(int id)
@@ -59,6 +69,11 @@ namespace NHNT.Services.Implement
                 throw new DataRuntimeException(StatusWrongFormat.USERNAME_OR_PASSWORD_WRONG_FROMAT);
             }
 
+            return Token(user);
+        }
+
+        private TokenDto Token(User user)
+        {
             JwtSecurityToken jwtSecurityToken = TokenUtils.GetJwtTokenHandler(user);
 
             string refreshTokenValue = TokenUtils.GenerateRefreshToken();
@@ -145,6 +160,87 @@ namespace NHNT.Services.Implement
             //_refreshTokenRepository.Update(refreshTokenDb);
 
             return tokenNew;
+        }
+
+        public TokenDto Register(UserDto dto)
+        {
+            ValidateRegister(dto);
+            User user = new User
+            {
+                Username = dto.Username,
+                Password = BCryptNet.HashPassword(dto.Password),
+                Email = dto.Email,
+                FullName = dto.FullName,
+                Phone = dto.Phone,
+                Gender = dto.Gender,
+                Birthday = dto.Birthday,
+            };
+
+            _userRepository.Add(user);
+
+            Role role = _roleRepository.GetByName(RoleConfig.USER);
+            UserRole userRole = new UserRole
+            {
+                User = user,
+                Role = role
+            };
+
+            _userRoleRepository.Add(userRole);
+
+            return Token(user);
+        }
+
+        private void ValidateRegister(UserDto dto)
+        {
+            if (dto == null || string.IsNullOrEmpty(dto.Username))
+            {
+                throw new DataRuntimeException(StatusWrongFormat.USERNAME_IS_EMPTY);
+            }
+
+            if (_userRepository.ExistByUsername(dto.Username))
+            {
+                throw new DataRuntimeException(StatusExist.USERNAME_IS_EXSIT);
+            }
+
+            if (string.IsNullOrEmpty(dto.Email))
+            {
+                throw new DataRuntimeException(StatusWrongFormat.EMAIL_IS_EMPTY);
+            }
+
+            if (_userRepository.ExistByEmail(dto.Email))
+            {
+                throw new DataRuntimeException(StatusExist.EMAIL_IS_EXSIT);
+            }
+
+            if (string.IsNullOrEmpty(dto.Phone))
+            {
+                throw new DataRuntimeException(StatusWrongFormat.PHONE_IS_EMPTY);
+            }
+
+            if (_userRepository.ExistByPhone(dto.Phone))
+            {
+                throw new DataRuntimeException(StatusExist.PHONE_IS_EXSIT);
+            }
+
+            if (string.IsNullOrEmpty(dto.FullName))
+            {
+                throw new DataRuntimeException(StatusWrongFormat.FULL_NAME_IS_EMPTY);
+            }
+
+            if (string.IsNullOrEmpty(dto.Password))
+            {
+                throw new DataRuntimeException(StatusWrongFormat.PASSWORD_IS_EMPTY);
+            }
+
+            if (string.IsNullOrEmpty(dto.RePassword))
+            {
+                throw new DataRuntimeException(StatusWrongFormat.RE_PASSWORD_IS_EMPTY);
+            }
+
+            if (!string.Equals(dto.Password, dto.RePassword))
+            {
+                throw new DataRuntimeException(StatusWrongFormat.RE_PASSWORD_NOT_SAME_PASSWORD);
+            }
         }
     }
 }

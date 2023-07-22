@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NHNT.Dtos;
 using NHNT.Services;
 
 namespace NHNT.Controllers
@@ -29,6 +30,18 @@ namespace NHNT.Controllers
         public IActionResult RefreshToken([FromForm] string accessToken, [FromForm] string refreshToken)
         {
             return Ok(_userService.RefreshToken(accessToken, refreshToken));
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult RegisterForm()
+        {
+            return View();
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult Register([FromForm] UserDto dto)
+        {
+            return Ok(_userService.Register(dto));
         }
     }
 }

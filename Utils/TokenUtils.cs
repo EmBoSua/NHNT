@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using NHNT.Constants;
 using NHNT.Constants.Statuses;
@@ -69,6 +68,33 @@ namespace NHNT.Utils
         public static TokenValidationParameters GetTokenValidationParameters()
         {
             return TokenValidationParameters;
+        }
+
+        public static UserPartial DecodeJwtToken(string token)
+        {
+            JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken;
+
+            ClaimsPrincipal claimsPrincipal = jwtSecurityTokenHandler.ValidateToken(token, TokenUtils.GetTokenValidationParameters(), out securityToken);
+
+            bool validAlgorithm = ((JwtSecurityToken)securityToken).Header.Alg.Equals(AppSettingConfig.Algorithms, StringComparison.InvariantCultureIgnoreCase);
+            if (!validAlgorithm)
+            {
+                throw new DataRuntimeException(StatusServer.TOKEN_INVALID);
+            }
+
+            var claims = claimsPrincipal.Claims.ToList();
+
+
+            var user = new UserPartial
+            {
+                Id = int.Parse(claims.FirstOrDefault(c => c.Type == "id")?.Value),
+                Username = claims.FirstOrDefault(c => c.Type == "username")?.Value,
+                Email = claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
+                Roles = claims.Where(c => c.Type == ClaimTypes.Role).Select(c => new Role(){Name = c.Value}).ToList(),
+            };
+
+            return user;
         }
     }
 }
