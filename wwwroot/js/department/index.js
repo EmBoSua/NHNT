@@ -5,19 +5,20 @@ window.addEventListener("load", () => {
 let page = 1;
 const previousPage = document.querySelector("#previous-page");
 const nextPage = document.querySelector("#next-page");
-const pageOne = document.querySelector("#page-one");
-const pageTwo = document.querySelector("#page-two");
-const pageThree = document.querySelector("#page-three");
+const pageFirst = document.querySelector("#page-first");
+const pageSecond = document.querySelector("#page-second");
+const pageThird = document.querySelector("#page-third");
 
 previousPage.addEventListener("click", () => {
   if (page === 1) return;
   page = page - 1;
-  console.log("previousPage", page);
+
+  if (!pageFirst?.value) return;
+  page = pageFirst.value;
 });
 
 nextPage.addEventListener("click", () => {
   page = page + 1;
-  console.log("nextPage", page);
 });
 
 const renderCard = (department) => {
@@ -26,7 +27,9 @@ const renderCard = (department) => {
       ? department.images[0].path
       : "";
 
-  return `<div class="card"><img src="images/departments/${image}" />
+  return `<div class="card" id="department-${
+    department.id
+  }"><img src="images/departments/${image}" />
     <div class="detail">
         <span>Địa chỉ: ${department.address}m2</span>
         <span>Diện tích: ${department.acreage}m2</span>
@@ -45,6 +48,10 @@ const appendViewDepartment = (departments) => {
     const newCard = htmlDoc.querySelector(".card");
     console.log(newCard);
     listCard.appendChild(newCard);
+
+    newCard.addEventListener("click", () => {
+      window.location.href = "/Department/Detail/" + department.id;
+    });
   });
 };
 
