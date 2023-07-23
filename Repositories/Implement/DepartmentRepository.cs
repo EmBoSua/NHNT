@@ -62,7 +62,7 @@ namespace NHNT.Repositories.Implement
             _context.SaveChanges();
         }
 
-        public Department[] List(int page, int limit)
+        public Department[] List(int page, int limit, string search)
         {
             if (page <= 0)
                 page = 1;
@@ -70,9 +70,13 @@ namespace NHNT.Repositories.Implement
             if (limit <= 0)
                 limit = int.MaxValue;
 
+            if (search == null) search = "";
+
             var skip = (page - 1) * limit;
 
+
             var departments = _context.Departments
+                .Where(d => d.Address.Contains(search))
                 .Include(d => d.User)
                 .Include(d => d.Images)
                 .Include(d => d.Group)

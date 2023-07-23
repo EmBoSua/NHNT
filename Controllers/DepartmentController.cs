@@ -64,9 +64,10 @@ namespace NHNT.Controllers
         }
 
         [HttpPost("[controller]/[action]")]
-        public IActionResult Page([FromForm] int page, [FromForm] int limit)
+        public IActionResult Page([FromForm] int page, [FromForm] int limit, string search)
         {
-            return Ok(_departmentService.List(page, limit));
+            if (search == null) search = "";
+            return Ok(_departmentService.List(page, limit, search));
         }
 
         [HttpGet("[controller]/[action]")]
@@ -90,9 +91,11 @@ namespace NHNT.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListDepartment(int page, int limit)
+        public IActionResult ListDepartment(int page, int limit, string search)
         {
-            var departments = _departmentService.List(page, limit);
+            if (search == null) search = "";
+
+            var departments = _departmentService.List(page, limit, search);
             var total = _departmentService.Count();
 
             ListDepartmentDto result = new ListDepartmentDto(departments, total);

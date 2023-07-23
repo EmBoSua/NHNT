@@ -27,9 +27,9 @@ namespace NHNT.Services.Implement
         }
 
 
-        public DepartmentDto[] List(int page, int limit)
+        public DepartmentDto[] List(int page, int limit, string search)
         {
-            var departments = _departmentRepository.List(page, limit);
+            var departments = _departmentRepository.List(page, limit, search);
             DepartmentDto[] result = Array.ConvertAll(array: departments, new Converter<Department, DepartmentDto>(ConvertDepartmentDto));
             // Console.WriteLine(JsonSerializer.Serialize(result));
             return result;
