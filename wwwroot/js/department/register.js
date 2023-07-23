@@ -37,9 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     var jsonData = JSON.stringify(data);
 
-    console.log(jsonData);
-    console.log(inputFiles.files);
-
     CustomRequest.postForm({
       url: "https://localhost:5001/Department/Register",
       addToken: true,

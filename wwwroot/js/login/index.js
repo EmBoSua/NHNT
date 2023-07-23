@@ -49,18 +49,19 @@ document.addEventListener("DOMContentLoaded", function () {
       addToken: false,
       data: {
         username: username.value,
-        password: password.value
+        password: password.value,
       },
       callback: (response) => {
         var dataJson = JSON.parse(response);
-        LocalStorage.setToken(response)
+        LocalStorage.setToken(response);
+        localStorage.setItem("username", username.value);
         // ToastMessage.show({
         //   type: "success",
         //   title: "Thành công!",
         //   message: dataJson.expiredTime
         // });
         window.location.href = "https://localhost:5001/";
-      }
+      },
     });
   });
 });

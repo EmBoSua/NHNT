@@ -293,3 +293,8 @@ img {
   height: auto;
   border: none;
 }
+
+.custom-select-box {
+  width: 200px; /* Set your desired width */
+  height: 40px; /* Set your desired height */
+}

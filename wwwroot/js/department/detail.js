@@ -98,3 +98,139 @@ const createSimilarItem = (index, data) => {
 
   return itemContent;
 };
+
+const storedValue = localStorage.getItem("username");
+const modelUsername = document
+  .getElementById("editButton")
+  .getAttribute("data-username");
+
+if (storedValue === modelUsername) {
+  document.getElementById("editButton").style.display = "block";
+} else {
+  document.getElementById("editButton").style.display = "none";
+}
+
+document.getElementById("editButton").addEventListener("click", function () {
+  fillDataModal();
+});
+
+const fillDataModal = (data) => {
+  model = document.getElementById("editButton");
+  data = {
+    address: model.getAttribute("data-address"),
+    description: model.getAttribute("data-description"),
+    acreage: model.getAttribute("data-acreage"),
+    groupId: model.getAttribute("data-groupId"),
+    phoneNumber: model.getAttribute("data-phone"),
+    price: model.getAttribute("data-price"),
+    isAvailable: model.getAttribute("data-isAvailable") == "True" ? 1 : 0,
+  };
+
+  document.getElementById("description").value = data["description"];
+  document.getElementById("price").value = data["price"];
+  document.getElementById("address").value = data["address"];
+  document.getElementById("acreage").value = data["acreage"];
+  document.getElementById("phoneNumber").value = data["phoneNumber"];
+  document.getElementById("departmentSelect").value = data["groupId"];
+  document.getElementById("departmentAvaliable").value = data["isAvailable"];
+};
+
+function loadJsonData() {
+  var xhr = new XMLHttpRequest();
+  var xhr = new XMLHttpRequest();
+  xhr.overrideMimeType("application/json");
+  xhr.open(
+    "GET",
+    new URL(
+      "https://localhost:5001/data/DepartmentGroup.json",
+      document.baseURI
+    ).href,
+    true
+  );
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var data = JSON.parse(xhr.responseText);
+      populateSelectBox(data);
+    }
+  };
+  xhr.send();
+}
+
+// Thêm các mục vào select box khi đọc dữ liệu thành công
+function populateSelectBox(data) {
+  var selectBox = document.getElementById("departmentSelect");
+  data.forEach(function (item) {
+    var option = document.createElement("option");
+    option.value = item.Id; // Lưu Id của mục vào giá trị của option
+    option.textContent = item.Name; // Hiển thị tên của mục là nội dung của option
+    selectBox.appendChild(option);
+  });
+}
+
+// Xử lý sự kiện khi người dùng chọn một mục trong select box
+document
+  .getElementById("departmentSelect")
+  .addEventListener("change", function () {
+    var selectedId = this.value; // Lấy giá trị Id của mục đã chọn
+  });
+
+// Gọi hàm để load dữ liệu vào select box khi trang đã tải xong
+document.addEventListener("DOMContentLoaded", function () {
+  loadJsonData();
+});
+
+function updateDepartment(id) {
+  var address = document.getElementById("address");
+
+  var price = document.getElementById("price");
+
+  var phoneNumber = document.getElementById("phoneNumber");
+
+  var acreage = document.getElementById("acreage");
+
+  var description = document.getElementById("description");
+  var groupId = document.getElementById("departmentSelect");
+  var isAvailable = document.getElementById("departmentAvaliable");
+
+  phoneNumber.addEventListener("focusout", () => {
+    validPhone(phoneNumber.value, msgPhoneNumber);
+  });
+  phoneNumber.addEventListener("keydown", () => {
+    hideMess(msgPhoneNumber);
+  });
+
+  if (!validPhone(phoneNumber.value, msgPhoneNumber)) {
+    return;
+  }
+  const data = {
+    address: address.value,
+    price: price.value,
+    phoneNumber: phoneNumber.value,
+    acreage: acreage.value,
+    description: description.value,
+    groupId: groupId.value,
+    isAvailable: isAvailable.value == 1 ? true : false,
+  };
+  CustomRequest.postForm({
+    url: "https://localhost:5001/Department/Update/" + id,
+    addToken: true,
+    data: data,
+    callback: (response) => {
+      ToastMessage.show({
+        type: "success",
+        title: "Thành công!",
+      });
+      window.location.href = "https://localhost:5001/Department/Detail/" + id;
+    },
+  });
+}
+
+const validPhone = (value, mess) => {
+  if (value === "") {
+    mess.textContent = "Vui lòng nhập số điện thoại của bạn";
+    mess.style.display = "block";
+    return false;
+  }
+
+  return true;
+};

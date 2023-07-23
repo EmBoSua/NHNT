@@ -58,6 +58,7 @@
 
 const handleLogout = () => {
   LocalStorage.removeToken();
+  localStorage.removeItem("username");
   window.location.href = "https://localhost:5001/Department";
 };
 

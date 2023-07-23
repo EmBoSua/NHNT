@@ -136,3 +136,17 @@ const handleSearch = () => {
   let search = document.querySelector("#input-seacrh")?.value;
   fetchDepartments(1, 9, search);
 };
+
+document
+  .getElementById("toggleSelectionBtn")
+  .addEventListener("click", function () {
+    const components = document.querySelectorAll(".list-card .card");
+    const isSelected = !components[0].classList.contains("selected");
+    for (const component of components) {
+      if (isSelected) {
+        component.classList.add("selected");
+      } else {
+        component.classList.remove("selected");
+      }
+    }
+  });
