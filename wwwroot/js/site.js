@@ -60,3 +60,7 @@ const handleLogout = () => {
   LocalStorage.removeToken();
   window.location.href = "https://localhost:5001/Department";
 };
+
+const goToMyDepartment = () => {
+  window.location.href = "/Department/MyDepartment";
+};
