@@ -81,7 +81,7 @@
               <dd class="col-8">@Model.CreatedAt</dd>
 
               <dt class="col-4">Trạng thái: </dt>
-              <dd class="col-8" id = "detail-status">@(@Model.IsAvailable.GetValueOrDefault(false) ? "Còn phòng" : "Đã cho thuê") vnđ</dd>
+              <dd class="col-8" id = "detail-status">@(@Model.IsAvailable.GetValueOrDefault(false) ? "Còn phòng" : "Đã cho thuê")</dd>
 
               <dt class="col-4">Chủ nhà</dt>
               <dd class="col-8">@Model.User.FullName</dd>
@@ -122,7 +122,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="updateModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="updateModalLabel">Cập nhật</h5>
         <button
           type="button"
           class="close"
