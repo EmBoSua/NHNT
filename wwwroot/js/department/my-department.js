@@ -29,6 +29,7 @@ const fetchDepartmentByUser = () => {
 
 const appendViewDepartment = (departments) => {
   const listCard = document.querySelector(".list-card");
+  if (!departments.length) return;
 
   departments.forEach((department) => {
     const parser = new DOMParser();
