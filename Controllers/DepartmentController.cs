@@ -11,12 +11,10 @@ namespace NHNT.Controllers
 {
     public class DepartmentController : ControllerCustom
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IDepartmentService _departmentService;
 
-        public DepartmentController(ILogger<HomeController> logger, IDepartmentService departmentService)
+        public DepartmentController(IDepartmentService departmentService)
         {
-            _logger = logger;
             _departmentService = departmentService;
         }
 
@@ -106,6 +104,14 @@ namespace NHNT.Controllers
         public IActionResult FindByUser([FromRoute] int id)
         {
             var departments = _departmentService.FindByUserId(id);
+            return Json(departments);
+        }
+
+        [HttpGet("[controller]/[action]")]
+        public IActionResult Me()
+        {
+            var user = GetUserPartial();
+            var departments = _departmentService.FindByUserId(userId: user.Id);
             return Json(departments);
         }
 

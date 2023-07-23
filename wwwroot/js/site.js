@@ -19,8 +19,7 @@
       failCallBack: (request) => {
         userSection.style.display = "none";
         userSection.classList.remove("d-flex");
-        loginSection.style.display = "block";
-        // console.log("log");
+        loginSection.style.display = "flex";
         // window.location.href = "https://localhost:5001/Account/Index";
       },
     });
@@ -62,5 +61,5 @@
 
 const handleLogout = () => {
   LocalStorage.removeToken();
-  window.location.href = "https://localhost:5001/";
+  window.location.href = "https://localhost:5001/Department";
 };
