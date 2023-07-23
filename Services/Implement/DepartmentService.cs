@@ -77,7 +77,7 @@ namespace NHNT.Services.Implement
                 Price = departmentDto.Price,
                 PhoneNumber = departmentDto.PhoneNumber,
                 Acreage = departmentDto.Acreage,
-                Status = departmentDto.Status,
+                Status = DepartmentStatus.PENDING,
                 Description = departmentDto.Description,
                 IsAvailable = departmentDto.IsAvailable,
                 CreatedAt = currentTime,
@@ -86,6 +86,10 @@ namespace NHNT.Services.Implement
                 GroupId = departmentDto.GroupId,
             };
             _departmentRepository.Add(department);
+            Console.WriteLine(department.Id);
+            Console.WriteLine(departmentDto.Images);
+
+
             _imageService.saveMultiple(departmentDto.Images, department.Id);
 
             throw new System.NotImplementedException();

@@ -12,35 +12,26 @@ namespace NHNT.Dtos
     {
         public int Id { get; set; }
 
-        // [Required]
         public string Address { get; set; }
 
-        // [Required]
         public Decimal Price { get; set; }
 
-        // [Required]
         public string PhoneNumber { get; set; }
 
-        // [Required]
         public Decimal Acreage { get; set; }
 
-        // [Required]
-        public DepartmentStatus Status { get; set; }
+        public DepartmentStatus Status { get; set; } = DepartmentStatus.PENDING;
 
-        // [Required]
         public string Description { get; set; }
 
-        // [Required]
-        public bool IsAvailable { get; set; }
+        public bool? IsAvailable { get; set; }
 
         public DateTime? CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
 
-        // [Required]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
-        // [Required]
         public int GroupId { get; set; }
         public ICollection<IFormFile> Images { get; set; }
 

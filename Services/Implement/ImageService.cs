@@ -20,10 +20,10 @@ namespace NHNT.Services.Implement
 
         public void saveMultiple(ICollection<IFormFile> images, int departmentId)
         {
-
+            Console.WriteLine(images.Count);
             if (images != null & images.Count > 0)
             {
-                string _uploadFolderPath = "Static/Upload/Images";
+                string _uploadFolderPath = "wwwroot/images/departments";
                 Guid uid = Guid.NewGuid();
                 string uidString = uid.ToString();
 
@@ -36,7 +36,6 @@ namespace NHNT.Services.Implement
 
                 foreach (IFormFile item in images)
                 {
-
                     string fileName = $"{uid}_{item.FileName}";
                     string filePath = Path.Combine(_uploadFolderPath, fileName);
                     using (var stream = new FileStream(filePath, FileMode.Create))

@@ -121,5 +121,6 @@ namespace NHNT.EF
                 e.HasOne(i => i.Department).WithMany(d => d.Images).HasForeignKey(i => i.DepartmentId);
             });
         }
+
     }
 }

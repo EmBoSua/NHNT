@@ -48,6 +48,7 @@ namespace NHNT.Controllers
         {
             try
             {
+                departmentDto.UserId = GetUserPartial().Id;
                 _departmentService.register(departmentDto);
             }
             catch (Exception e)
