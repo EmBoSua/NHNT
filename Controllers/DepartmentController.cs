@@ -1,10 +1,8 @@
 using System;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using NHNT.Models;
-using NHNT.Services;
 using NHNT.Dtos;
+using NHNT.Services;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using NHNT.Constants;
@@ -36,6 +34,35 @@ namespace NHNT.Controllers
             return View(_departmentService.GetById(id));
         }
 
+        [HttpGet("[controller]/[action]")]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+
+        [HttpPost("[controller]/[action]")]
+        public IActionResult Register([FromForm] DepartmentRegisDto departmentDto)
+        {
+            try
+            {
+                departmentDto.UserId = GetUserPartial().Id;
+                _departmentService.register(departmentDto);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return View();
+        }
+
+
+        [HttpGet("[controller]/[action]")]
+        public IActionResult Update()
+        {
+            return View();
+        }
+
         [HttpPost("[controller]/[action]")]
         public IActionResult Page([FromForm] int page, [FromForm] int limit)
         {
@@ -45,6 +72,20 @@ namespace NHNT.Controllers
         [HttpGet("[controller]/[action]")]
         public IActionResult AdminReview()
         {
+            return View();
+        }
+
+        [HttpPost("[controller]/[action]/{id}")]
+        public IActionResult Update([FromForm] DepartmentUpdateDto departmentDto, int id)
+        {
+            try
+            {
+                _departmentService.Update(id, departmentDto);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             return View();
         }
 
