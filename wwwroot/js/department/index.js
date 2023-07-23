@@ -55,7 +55,7 @@ const renderCard = (department) => {
     department.id
   }"><img src="/images/departments/${image}" />
     <div class="detail">
-        <span>Địa chỉ: ${department.address}m2</span>
+        <span>Địa chỉ: ${department.address}</span>
         <span>Diện tích: ${department.acreage}m2</span>
         <span>Giá phòng trọ: ${department.price}</span>
         <span>Thời gian đăng: ${formatDate(department.createdAt)}</span>

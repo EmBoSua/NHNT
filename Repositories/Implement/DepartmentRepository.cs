@@ -80,7 +80,7 @@ namespace NHNT.Repositories.Implement
                 .Include(d => d.User)
                 .Include(d => d.Images)
                 .Include(d => d.Group)
-                .OrderBy(d => d.CreatedAt)
+                .OrderByDescending(d => d.CreatedAt)
                 .Skip(skip)
                 .Take(limit);
             return departments.ToArray();
@@ -88,7 +88,7 @@ namespace NHNT.Repositories.Implement
 
         public Department[] FindByUserId(int userId)
         {
-            var departments = _context.Departments.Where(department => department.UserId == userId);
+            var departments = _context.Departments.Where(department => department.UserId == userId).Include(d => d.Images).OrderByDescending(d => d.CreatedAt);
             return departments.ToArray();
         }
 
