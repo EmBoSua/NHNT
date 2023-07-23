@@ -94,7 +94,7 @@ const fetchDepartments = async (page = 1, limit = 10) => {
 
       appendViewDepartment(data, isFirstLoad);
       if (data.length) {
-        totalPage = Math.ceil(total / data.length);
+        totalPage = Math.ceil(total / limit);
       }
 
       prevButton.addEventListener("click", () => {
@@ -104,7 +104,7 @@ const fetchDepartments = async (page = 1, limit = 10) => {
       });
       nextButton.addEventListener("click", () => {
         const pageNum = page + 1;
-        if (pageNum > totalPage) return;
+        if (pageNum >= totalPage) return;
         setCurrentPage(pageNum);
       });
 
