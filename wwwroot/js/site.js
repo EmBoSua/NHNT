@@ -35,25 +35,22 @@
         if (element.name === "ROLE_ADMIN") {
           var contextHtml = `
           <li class="nav-item">
-            <a class="nav-link text-dark" href="/Department/Register">Đăng phòng </a>
+            <a class="nav-link text-dark" href="/Department/AdminReview">Department</a>
           </li>
-          <li class="nav-item">
-                <a class="nav-link text-dark" href="/Department/AdminReview">Department</a>
-            </li>
           `;
           actionRole.insertAdjacentHTML("beforeend", contextHtml);
           return;
         }
 
-        // if (element.name === "ROLE_USER") {
-        //   var contextHtml = `
-        //     <li class="nav-item">
-        //         <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Detail">Privacy</a>
-        //     </li>
-        //   `;
-        //   actionRole.insertAdjacentHTML("beforeend", contextHtml);
-        //   return;
-        // }
+        if (element.name === "ROLE_USER") {
+          var contextHtml = `
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="/Department/Register">Đăng phòng </a>
+            </li>
+          `;
+          actionRole.insertAdjacentHTML("beforeend", contextHtml);
+          return;
+        }
       });
     }
   };

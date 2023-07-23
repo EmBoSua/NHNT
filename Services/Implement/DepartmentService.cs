@@ -86,10 +86,6 @@ namespace NHNT.Services.Implement
                 GroupId = departmentDto.GroupId,
             };
             _departmentRepository.Add(department);
-            Console.WriteLine(department.Id);
-            Console.WriteLine(departmentDto.Images);
-
-
             _imageService.saveMultiple(departmentDto.Images, department.Id);
 
             throw new System.NotImplementedException();
