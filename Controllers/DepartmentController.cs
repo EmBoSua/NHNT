@@ -71,7 +71,7 @@ namespace NHNT.Controllers
         {
             var user = GetUserPartial();
             var departments = _departmentService.FindByUserId(userId: user.Id);
-            return Json(departments);
+            return Json(data: departments);
         }
 
         [Authorize(RoleConfig.ADMIN)]

@@ -19,7 +19,8 @@ const fetchDepartmentByUser = () => {
     url: `/Department/Me`,
     addToken: true,
     callback: (response) => {
-      appendViewDepartment(response);
+      const departments = JSON.parse(response);
+      appendViewDepartment(departments);
     },
     failCallBack: (request) => {
       console.log(request);
