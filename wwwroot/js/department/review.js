@@ -29,11 +29,13 @@ const createDepartmentItems = (data) => {
 };
 
 const createDepartmenttem = (index, data) => {
+  const image = data.images && data.images.length ? data.images[0].path : "";
+
   var itemContent = `
     <div id="deparment-${data.id}" class="department-review-row">
         <div class="left">
           <a class="detail-image" href="/Department/Detail/${data.id}">
-            <img src="https://localhost:5001/images/departments/${data.images[0].path}" alt="Department">
+            <img src="https://localhost:5001/images/departments/${image}" alt="Department">
           </a>
         </div>
         <div class="middle">

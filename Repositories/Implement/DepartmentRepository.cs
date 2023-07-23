@@ -62,7 +62,7 @@ namespace NHNT.Repositories.Implement
             _context.SaveChanges();
         }
 
-        public Department[] List(int page, int limit, string search)
+        public Department[] List(int page, int limit, string search, DepartmentDto dto)
         {
             if (page <= 0)
                 page = 1;
@@ -74,15 +74,25 @@ namespace NHNT.Repositories.Implement
 
             var skip = (page - 1) * limit;
 
+            var query = _context.Departments.AsQueryable();
 
-            var departments = _context.Departments
-                .Where(d => d.Address.Contains(search))
+            if (dto.Status != null)
+            {
+                query = query.Where(d => d.Status.Equals(dto.Status) && d.Address.Contains(search));
+            }
+            else
+            {
+                query = query.Where(d => d.Address.Contains(search));
+            }
+
+            var departments = query
                 .Include(d => d.User)
                 .Include(d => d.Images)
                 .Include(d => d.Group)
                 .OrderByDescending(d => d.CreatedAt)
                 .Skip(skip)
                 .Take(limit);
+
             return departments.ToArray();
         }
 

@@ -6,7 +6,7 @@ namespace NHNT.Services
 {
     public interface IDepartmentService
     {
-        DepartmentDto[] List(int page, int limit, string search);
+        DepartmentDto[] List(int page, int limit, string search, DepartmentDto query);
         DepartmentDto[] FindByUserId(int userId);
         int Count();
         Department GetById(int id);

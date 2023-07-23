@@ -34,6 +34,11 @@ namespace NHNT.Dtos
 
         }
 
+        public DepartmentDto(DepartmentStatus status)
+        {
+            this.Status = status;
+        }
+
         public DepartmentDto(Department department)
         {
             if (department == null)
