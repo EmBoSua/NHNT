@@ -40,6 +40,7 @@ var CustomRequest = (function () {
       xhr.send(data);
     } else if (contentType === "form") {
       var formData = new FormData();
+      console.log("step 1", data);
       addFormData(formData, data);
       xhr.send(formData);
     } else {
@@ -52,8 +53,11 @@ var CustomRequest = (function () {
       Object.keys(data).forEach((key) => {
         const value = data[key];
         const formKey = parentKey ? `${parentKey}[${key}]` : key;
-
-        if (value && typeof value === "object") {
+        if (value instanceof FileList) {
+          for (let i = 0; i < value.length; i++) {
+            formData.append(formKey, value[i], value[i].name);
+          }
+        } else if (value && typeof value === "object") {
           addFormData(formData, value, formKey);
         } else {
           formData.append(formKey, value);

@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
           title: "Thành công!",
         });
         const json = JSON.parse(response);
-        console.log(json)
+        console.log(json);
         window.location.href = "https://localhost:5001/";
       },
     });
