@@ -11,7 +11,7 @@ namespace NHNT.Repositories
         void Update(Department department);
         void Delete(int id);
         // pagination department
-        Department[] List(int page, int limit);
+        Department[] List(int page, int limit, string search);
         Department[] FindByUserId(int userId);
         int Count();
         List<Department> Search(int pageIndex, int pageSize, DepartmentDto dto);

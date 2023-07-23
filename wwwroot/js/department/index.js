@@ -85,9 +85,12 @@ function formatDate(dateString) {
   return date.toLocaleDateString("vi-VN");
 }
 
-const fetchDepartments = async (page = 1, limit = 10) => {
+const fetchDepartments = async (page = 1, limit = 9, search = "") => {
+  let url = `/Department/ListDepartment?page=${page}&limit=${limit}`;
+  if (search) url += `&search=${search}`;
+
   await CustomRequest.get({
-    url: `/Department/ListDepartment?page=${page}&limit=${limit}`,
+    url,
     addToken: true,
     callback: (response) => {
       const { data, total } = JSON.parse(response);
@@ -127,4 +130,9 @@ const fetchDepartments = async (page = 1, limit = 10) => {
       console.log(request);
     },
   });
+};
+
+const handleSearch = () => {
+  let search = document.querySelector("#input-seacrh")?.value;
+  fetchDepartments(1, 9, search);
 };
