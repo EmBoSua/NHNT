@@ -7,8 +7,10 @@ const limit = 9;
 let totalPage = 1;
 let isFirstLoad = true;
 
-window.addEventListener("load", () => {
-  fetchDepartments(page, limit);
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    fetchDepartments(page, limit);
+  }, 500);
 });
 
 const appendPageNumber = (index) => {
@@ -41,7 +43,7 @@ const setCurrentPage = (pageNum) => {
   if (pageNum > totalPage) return;
 
   page = pageNum;
-  if (page !== 1) fetchDepartments(page, limit);
+  fetchDepartments(page, limit);
   handleActivePageNumber();
 };
 
@@ -137,9 +139,9 @@ const handleSearch = () => {
   fetchDepartments(1, 9, search);
 };
 
-document
-  .getElementById("toggleSelectionBtn")
-  .addEventListener("click", function () {
+var btnToggleSelection = document.getElementById("toggleSelectionBtn");
+if (btnToggleSelection) {
+  btnToggleSelection.addEventListener("click", function () {
     const components = document.querySelectorAll(".list-card .card");
     const isSelected = !components[0].classList.contains("selected");
     for (const component of components) {
@@ -150,3 +152,4 @@ document
       }
     }
   });
+}

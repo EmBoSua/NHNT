@@ -133,8 +133,8 @@ namespace NHNT.Repositories.Implement
                 .Include(q => q.User)
                 .Include(q => q.Images)
                 .Include(q => q.Group)
-                .Skip(startIndex)
                 .OrderBy(q => q.CreatedAt)
+                .Skip(startIndex)
                 .Take(pageSize)
                 .ToList();
         }

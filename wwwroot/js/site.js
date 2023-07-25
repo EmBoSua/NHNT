@@ -35,7 +35,7 @@
         if (element.name === "ROLE_ADMIN") {
           var contextHtml = `
           <li class="nav-item">
-            <a class="nav-link text-dark" href="/Department/AdminReview">Department</a>
+            <a class="nav-link text-dark" href="/Department/AdminReview">Phê duyệt</a>
           </li>
           `;
           actionRole.insertAdjacentHTML("beforeend", contextHtml);
